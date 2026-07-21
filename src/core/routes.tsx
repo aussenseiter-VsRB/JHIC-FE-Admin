@@ -1,14 +1,16 @@
 import type { RouteObject } from "react-router-dom";
 import Layout from "./layout";
+import ManajemenUser from "../modules/manajemenUser/manajemenUser";
+import Login from "../modules/login/login";
 
 const routes: RouteObject[] = [
+  { path: "/", element: <Login /> },
   {
     path: "/",
     element: <Layout />,
     children: [
-      { index: true, element: <div className="text-2xl font-bold">Dashboard</div> },
       { path: "dashboard", element: <div className="text-2xl font-bold">Dashboard</div> },
-      { path: "manajemen-user", element: <div className="text-2xl font-bold">Manajemen User</div> },
+      { path: "manajemen-user", element: <ManajemenUser /> },
     ],
   },
 ];

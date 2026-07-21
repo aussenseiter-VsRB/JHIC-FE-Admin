@@ -1,0 +1,15 @@
+{
+  "page": {
+    "title": "Login",
+    "subtitle": "Masukkan akun Anda untuk melanjutkan"
+  },
+  "form": {
+    "usernameLabel": "Username",
+    "usernamePlaceholder": "Masukkan username",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Masukkan password",
+    "submitButton": "Masuk"
+  },
+  "footer": {
+  }
+}

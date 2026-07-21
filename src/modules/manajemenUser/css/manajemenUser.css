@@ -1,0 +1,321 @@
+.manajemen-user {
+  max-width: 960px;
+}
+
+.manajemen-user-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.manajemen-user-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.manajemen-user-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #3b82f6;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.manajemen-user-add-btn:hover {
+  background-color: #2563eb;
+}
+
+.manajemen-user-toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.manajemen-user-search {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.manajemen-user-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.manajemen-user-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #334155;
+  background: #ffffff;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.manajemen-user-search-input:focus {
+  border-color: #3b82f6;
+}
+
+.manajemen-user-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.manajemen-user-filter {
+  display: flex;
+  gap: 8px;
+}
+
+.manajemen-user-filter-select {
+  padding: 10px 32px 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #334155;
+  background: #ffffff;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: border-color 0.15s;
+}
+
+.manajemen-user-filter-select:focus {
+  border-color: #3b82f6;
+}
+
+.manajemen-user-table-wrapper {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.manajemen-user-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.manajemen-user-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.manajemen-user-table th:hover {
+  background-color: #f1f5f9;
+}
+
+.manajemen-user-table-th-content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.manajemen-user-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+}
+
+.manajemen-user-table tr:last-child td {
+  border-bottom: none;
+}
+
+.manajemen-user-table tr:hover td {
+  background-color: #f8fafc;
+}
+
+.manajemen-user-status {
+  display: inline-flex;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.manajemen-user-status--active {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.manajemen-user-status--inactive {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.manajemen-user-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.manajemen-user-action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+
+.manajemen-user-action-btn--edit {
+  background-color: #eff6ff;
+  color: #3b82f6;
+}
+
+.manajemen-user-action-btn--edit:hover {
+  background-color: #dbeafe;
+}
+
+.manajemen-user-action-btn--delete {
+  background-color: #fef2f2;
+  color: #ef4444;
+}
+
+.manajemen-user-action-btn--delete:hover {
+  background-color: #fee2e2;
+}
+
+.manajemen-user-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+}
+
+.manajemen-user-pagination-info {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.manajemen-user-pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.manajemen-user-pagination-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.manajemen-user-pagination-btn:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+
+.manajemen-user-pagination-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.manajemen-user-pagination-btn--active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+}
+
+.manajemen-user-pagination-btn--active:hover {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.manajemen-user-empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.manajemen-user-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background-color: #166534;
+  color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+  z-index: 100;
+  animation: toast-slide-in 0.3s ease-out;
+}
+
+.manajemen-user-toast--error {
+  background-color: #991b1b;
+}
+
+.manajemen-user-toast-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.manajemen-user-toast-close:hover {
+  opacity: 1;
+}
+
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
