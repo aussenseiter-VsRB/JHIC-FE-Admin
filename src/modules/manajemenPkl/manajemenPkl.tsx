@@ -1,21 +1,12 @@
 import { useState, useMemo, useEffect, useRef } from "react";
-import {
-  Plus,
-  Search,
-  Pencil,
-  Trash2,
-  ChevronUp,
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle,
-  X,
-  Download,
-  Upload,
-} from "lucide-react";
+import { Plus, Download, Upload } from "lucide-react";
 import * as XLSX from "xlsx";
 import pageData from "./manajemenPkl.json";
 import "./css/manajemenPkl.css";
+import Toolbar from "./components/Toolbar";
+import SiswaTable from "./components/SiswaTable";
+import Toast from "../../components/Toast";
+import Pagination from "../../components/Pagination";
 
 type Siswa = (typeof pageData.siswa)[number];
 type SortKey = "id" | "nama" | "nis" | "kelas" | "jurusan" | "status";
@@ -24,11 +15,6 @@ type SortDirection = "asc" | "desc";
 interface SortConfig {
   key: SortKey;
   direction: SortDirection;
-}
-
-interface Toast {
-  message: string;
-  type: "success" | "error";
 }
 
 function ManajemenPkl() {
@@ -43,7 +29,7 @@ function ManajemenPkl() {
     direction: "asc",
   });
   const [currentPage, setCurrentPage] = useState(1);
-  const [toast, setToast] = useState<Toast | null>(null);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -61,7 +47,7 @@ function ManajemenPkl() {
       result = result.filter(
         (s) =>
           s.nama.toLowerCase().includes(query) ||
-          s.nis.toLowerCase().includes(query)
+          s.nis.toLowerCase().includes(query),
       );
     }
 
@@ -88,7 +74,7 @@ function ManajemenPkl() {
   const totalPages = Math.ceil(filteredSiswa.length / pagination.perPage);
   const paginatedSiswa = filteredSiswa.slice(
     (currentPage - 1) * pagination.perPage,
-    currentPage * pagination.perPage
+    currentPage * pagination.perPage,
   );
 
   const startItem = filteredSiswa.length === 0 ? 0 : (currentPage - 1) * pagination.perPage + 1;
@@ -115,7 +101,7 @@ function ManajemenPkl() {
   };
 
   const handleExport = () => {
-    const exportData = filteredSiswa.map(({ id, ...rest }) => rest);
+    const exportData = filteredSiswa.map(({ id: _, ...rest }) => rest);
     const ws = XLSX.utils.json_to_sheet(exportData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Data Siswa");
@@ -154,35 +140,6 @@ function ManajemenPkl() {
     e.target.value = "";
   };
 
-  const renderSortIcon = (key: SortKey) => {
-    if (sortConfig.key !== key) return null;
-    return sortConfig.direction === "asc" ? (
-      <ChevronUp size={14} />
-    ) : (
-      <ChevronDown size={14} />
-    );
-  };
-
-  const visiblePages = (): (number | "...")[] => {
-    const pages: (number | "...")[] = [];
-    if (totalPages <= 5) {
-      for (let i = 1; i <= totalPages; i++) pages.push(i);
-    } else {
-      pages.push(1);
-      if (currentPage > 3) pages.push("...");
-      for (
-        let i = Math.max(2, currentPage - 1);
-        i <= Math.min(totalPages - 1, currentPage + 1);
-        i++
-      ) {
-        pages.push(i);
-      }
-      if (currentPage < totalPages - 2) pages.push("...");
-      pages.push(totalPages);
-    }
-    return pages;
-  };
-
   return (
     <div className="manajemen-pkl">
       <div className="manajemen-pkl-header">
@@ -192,7 +149,11 @@ function ManajemenPkl() {
             <Download size={16} />
             Export Excel
           </button>
-          <button className="manajemen-pkl-import-btn" type="button" onClick={() => fileInputRef.current?.click()}>
+          <button
+            className="manajemen-pkl-import-btn"
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+          >
             <Upload size={16} />
             Import Excel
           </button>
@@ -210,175 +171,45 @@ function ManajemenPkl() {
         </div>
       </div>
 
-      <div className="manajemen-pkl-toolbar">
-        <div className="manajemen-pkl-search">
-          <Search className="manajemen-pkl-search-icon" size={16} />
-          <input
-            className="manajemen-pkl-search-input"
-            type="text"
-            placeholder="Cari nama atau NIS..."
-            value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1);
-            }}
-          />
-        </div>
-        <div className="manajemen-pkl-filter">
-          <select
-            className="manajemen-pkl-filter-select"
-            value={jurusanFilter}
-            onChange={(e) => {
-              setJurusanFilter(e.target.value);
-              setCurrentPage(1);
-            }}
-          >
-            {filters.jurusan.map((j) => (
-              <option key={j} value={j}>
-                Jurusan: {j}
-              </option>
-            ))}
-          </select>
-          <select
-            className="manajemen-pkl-filter-select"
-            value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value);
-              setCurrentPage(1);
-            }}
-          >
-            {filters.statuses.map((s) => (
-              <option key={s} value={s}>
-                Status: {s}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      <Toolbar
+        searchPlaceholder="Cari nama atau NIS..."
+        searchQuery={searchQuery}
+        onSearchChange={(v) => { setSearchQuery(v); setCurrentPage(1); }}
+        filters={[
+          { label: "Jurusan", value: jurusanFilter, options: filters.jurusan },
+          { label: "Status", value: statusFilter, options: filters.statuses },
+        ]}
+        onFilterChange={(i, v) => {
+          if (i === 0) setJurusanFilter(v);
+          else setStatusFilter(v);
+          setCurrentPage(1);
+        }}
+      />
 
       <div className="manajemen-pkl-table-wrapper">
-        <table className="manajemen-pkl-table">
-          <thead>
-            <tr>
-              {table.columns.map((col) => {
-                const sortKey = col.toLowerCase() as SortKey;
-                const isSortable = ["id", "nama", "nis", "kelas", "jurusan", "status"].includes(sortKey);
-                return (
-                  <th
-                    key={col}
-                    onClick={isSortable ? () => handleSort(sortKey) : undefined}
-                    style={{ cursor: isSortable ? "pointer" : "default" }}
-                  >
-                    <div className="manajemen-pkl-table-th-content">
-                      {col}
-                      {isSortable && renderSortIcon(sortKey)}
-                    </div>
-                  </th>
-                );
-              })}
-            </tr>
-          </thead>
-          <tbody>
-            {paginatedSiswa.length === 0 ? (
-              <tr>
-                <td colSpan={table.columns.length} className="manajemen-pkl-empty">
-                  Tidak ada data ditemukan
-                </td>
-              </tr>
-            ) : (
-              paginatedSiswa.map((item) => (
-                <tr key={item.id}>
-                  <td>{item.id}</td>
-                  <td>{item.nama}</td>
-                  <td>{item.nis}</td>
-                  <td>{item.kelas}</td>
-                  <td>{item.jurusan}</td>
-                  <td>
-                    <span
-                      className={`manajemen-pkl-status manajemen-pkl-status--${item.status.toLowerCase()}`}
-                    >
-                      {item.status}
-                    </span>
-                  </td>
-                  <td>
-                    <div className="manajemen-pkl-actions">
-                      <button
-                        className="manajemen-pkl-action-btn manajemen-pkl-action-btn--edit"
-                        type="button"
-                        title="Edit"
-                        onClick={() => handleEdit(item)}
-                      >
-                        <Pencil size={14} />
-                      </button>
-                      <button
-                        className="manajemen-pkl-action-btn manajemen-pkl-action-btn--delete"
-                        type="button"
-                        title="Hapus"
-                        onClick={() => handleDelete(item)}
-                      >
-                        <Trash2 size={14} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
+        <SiswaTable
+          columns={table.columns}
+          siswaList={paginatedSiswa}
+          sortConfig={sortConfig}
+          onSort={handleSort}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
 
         <div className="manajemen-pkl-footer">
           <span className="manajemen-pkl-pagination-info">
             Showing {startItem}-{endItem} of {filteredSiswa.length}
           </span>
-          <div className="manajemen-pkl-pagination">
-            <button
-              className="manajemen-pkl-pagination-btn"
-              type="button"
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((p) => p - 1)}
-            >
-              <ChevronLeft size={16} />
-            </button>
-            {visiblePages().map((page, i) =>
-              page === "..." ? (
-                <span key={`dots-${i}`} style={{ padding: "0 4px", color: "#94a3b8" }}>
-                  ...
-                </span>
-              ) : (
-                <button
-                  key={page}
-                  className={`manajemen-pkl-pagination-btn${currentPage === page ? " manajemen-pkl-pagination-btn--active" : ""}`}
-                  type="button"
-                  onClick={() => setCurrentPage(page)}
-                >
-                  {page}
-                </button>
-              )
-            )}
-            <button
-              className="manajemen-pkl-pagination-btn"
-              type="button"
-              disabled={currentPage === totalPages || totalPages === 0}
-              onClick={() => setCurrentPage((p) => p + 1)}
-            >
-              <ChevronRight size={16} />
-            </button>
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </div>
 
       {toast && (
-        <div className={`manajemen-pkl-toast${toast.type === "error" ? " manajemen-pkl-toast--error" : ""}`}>
-          <CheckCircle size={18} />
-          {toast.message}
-          <button
-            className="manajemen-pkl-toast-close"
-            type="button"
-            onClick={() => setToast(null)}
-          >
-            <X size={14} />
-          </button>
-        </div>
+        <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />
       )}
     </div>
   );
