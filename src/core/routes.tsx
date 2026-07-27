@@ -1,5 +1,6 @@
 import type { RouteObject } from "react-router-dom";
 import Layout from "./layout";
+import Dashboard from "../modules/dashboard/dashboard";
 import ManajemenUser from "../modules/manajemenUser/manajemenUser";
 import ManajemenPkl from "../modules/manajemenPkl/manajemenPkl";
 import StatusPpdb from "../modules/statusPpdb/statusPpdb";
@@ -11,7 +12,7 @@ const routes: RouteObject[] = [
     path: "/",
     element: <Layout />,
     children: [
-      { path: "dashboard", element: <div className="text-2xl font-bold">Dashboard</div> },
+      { path: "dashboard", element: <Dashboard /> },
       { path: "manajemen-user", element: <ManajemenUser /> },
       { path: "manajemen-pkl", element: <ManajemenPkl /> },
       { path: "status-ppdb", element: <StatusPpdb /> },

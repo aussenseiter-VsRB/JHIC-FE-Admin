@@ -1,0 +1,56 @@
+{
+  "page": {
+    "title": "Dashboard",
+    "welcome": "Selamat datang kembali"
+  },
+  "stats": [
+    {
+      "label": "Total Siswa",
+      "value": 1248,
+      "sub": "+12% dari bulan lalu",
+      "progressPercent": 85
+    },
+    {
+      "label": "Siswa Aktif",
+      "value": 1102,
+      "sub": "88% dari total",
+      "progressPercent": 88
+    },
+    {
+      "label": "Program PKL",
+      "value": 86,
+      "sub": "12 mitra aktif",
+      "progressPercent": 72
+    },
+    {
+      "label": "PPDB Diterima",
+      "value": 342,
+      "sub": "dari 500 kuota",
+      "progressPercent": 68
+    }
+  ],
+  "actions": [
+    {
+      "label": "Manajemen User",
+      "description": "Kelola akun siswa & admin",
+      "href": "/manajemen-user"
+    },
+    {
+      "label": "Manajemen PKL",
+      "description": "Pantau data praktik kerja lapangan",
+      "href": "/manajemen-pkl"
+    },
+    {
+      "label": "Status PPDB",
+      "description": "Atur status pendaftaran PPDB",
+      "href": "/status-ppdb"
+    }
+  ],
+  "recentStudents": [
+    { "name": "Ahmad Fauzi", "detail": "XI TKJ 2", "badge": "Aktif" },
+    { "name": "Siti Nurhaliza", "detail": "XII RPL 1", "badge": "PKL" },
+    { "name": "Budi Santoso", "detail": "XI TKJ 1", "badge": "Aktif" },
+    { "name": "Dewi Lestari", "detail": "XII RPL 2", "badge": "PPDB" },
+    { "name": "Eko Prasetyo", "detail": "X TKJ 1", "badge": "Aktif" }
+  ]
+}
