@@ -1,0 +1,30 @@
+{
+  "page": {
+    "title": "Manajemen PKL",
+    "addButtonLabel": "Tambah Siswa"
+  },
+  "siswa": [
+    { "id": 1, "nama": "Budi Santoso", "nis": "2024001", "kelas": "XII", "jurusan": "PPLG", "status": "Approve" },
+    { "id": 2, "nama": "Siti Rahayu", "nis": "2024002", "kelas": "XII", "jurusan": "Hotel", "status": "Pending" },
+    { "id": 3, "nama": "Andi Wijaya", "nis": "2024003", "kelas": "XII", "jurusan": "Akuntansi", "status": "Approve" },
+    { "id": 4, "nama": "Dewi Lestari", "nis": "2024004", "kelas": "XII", "jurusan": "PPLG", "status": "Pending" },
+    { "id": 5, "nama": "Rizky Pratama", "nis": "2024005", "kelas": "XII", "jurusan": "Hotel", "status": "Approve" },
+    { "id": 6, "nama": "Maya Putri", "nis": "2024006", "kelas": "XII", "jurusan": "Akuntansi", "status": "Pending" },
+    { "id": 7, "nama": "Fajar Nugroho", "nis": "2024007", "kelas": "XII", "jurusan": "Hotel", "status": "Approve" },
+    { "id": 8, "nama": "Rina Marlina", "nis": "2024008", "kelas": "XII", "jurusan": "PPLG", "status": "Pending" },
+    { "id": 9, "nama": "Dimas Aditya", "nis": "2024009", "kelas": "XII", "jurusan": "Akuntansi", "status": "Approve" },
+    { "id": 10, "nama": "Lestari Budiman", "nis": "2024010", "kelas": "XII", "jurusan": "PPLG", "status": "Pending" },
+    { "id": 11, "nama": "Hendra Wijaya", "nis": "2024011", "kelas": "XII", "jurusan": "Hotel", "status": "Approve" },
+    { "id": 12, "nama": "Ayu Permata", "nis": "2024012", "kelas": "XII", "jurusan": "Akuntansi", "status": "Pending" }
+  ],
+  "table": {
+    "columns": ["ID", "Nama", "NIS", "Kelas", "Jurusan", "Status", "Action"]
+  },
+  "filters": {
+    "jurusan": ["All", "Hotel", "PPLG", "Akuntansi"],
+    "statuses": ["All", "Pending", "Approve"]
+  },
+  "pagination": {
+    "perPage": 5
+  }
+}
