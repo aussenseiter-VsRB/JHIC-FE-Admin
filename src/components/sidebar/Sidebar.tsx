@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
-import { Zap, LayoutDashboard, Users, GraduationCap } from "lucide-react";
+import { Zap, LayoutDashboard, Users, GraduationCap, ClipboardCheck } from "lucide-react";
 import "./Sidebar.css";
 
 const menuItems = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { path: "/manajemen-user", label: "Manajemen User", icon: Users },
   { path: "/manajemen-pkl", label: "Manajemen PKL", icon: GraduationCap },
+  { path: "/status-ppdb", label: "Status PPDB", icon: ClipboardCheck },
 ];
 
 function Sidebar() {

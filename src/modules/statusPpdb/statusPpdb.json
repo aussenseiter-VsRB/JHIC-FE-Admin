@@ -1,0 +1,15 @@
+{
+  "page": {
+    "title": "Status PPDB"
+  },
+  "stats": {
+    "totalPendaftar": 256,
+    "diterima": 180,
+    "pending": 76,
+    "kuotaTotal": 300
+  },
+  "toggle": {
+    "openLabel": "Mulai PPDB",
+    "closeLabel": "Tutup PPDB"
+  }
+}
