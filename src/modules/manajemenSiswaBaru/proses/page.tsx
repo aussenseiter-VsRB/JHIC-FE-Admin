@@ -1,5 +1,6 @@
-import { useState, useMemo, useEffect } from "react";
-import { Plus } from "lucide-react";
+import { useState, useMemo, useEffect, useRef } from "react";
+import { Plus, Download, Upload } from "lucide-react";
+import * as XLSX from "xlsx";
 import pageData from "../proses/proses.json";
 import "./css/page.css";
 import ToolbarSiswa from "../components/ToolbarSiswa";
@@ -18,6 +19,8 @@ function Proses() {
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: "asc" | "desc" }>({ key: "id", direction: "asc" });
   const [currentPage, setCurrentPage] = useState(1);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [siswaList, setSiswaList] = useState<Siswa[]>(pageData.siswa);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (toast) {
@@ -27,7 +30,7 @@ function Proses() {
   }, [toast]);
 
   const filteredData = useMemo(() => {
-    let result = [...pageData.siswa];
+    let result = [...siswaList];
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
@@ -56,7 +59,7 @@ function Proses() {
     });
 
     return result;
-  }, [searchQuery, jurusanFilter, statusFilter, sortConfig]);
+  }, [siswaList, searchQuery, jurusanFilter, statusFilter, sortConfig]);
 
   const totalPages = Math.ceil(filteredData.length / pagination.perPage);
   const paginatedData = filteredData.slice(
@@ -83,17 +86,78 @@ function Proses() {
   };
 
   const handleDelete = (item: Record<string, string | number>) => {
+    setSiswaList((prev) => prev.filter((s) => s.id !== item.id));
     showToast(`Siswa "${item.nama}" berhasil dihapus`);
+  };
+
+  const handleExport = () => {
+    const exportData = filteredData.map(({ id: _id, tglDaftar, ...rest }) => {
+      void _id;
+      return { ...rest, "Tgl. Daftar": tglDaftar };
+    });
+    const ws = XLSX.utils.json_to_sheet(exportData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Siswa Baru");
+    XLSX.writeFile(wb, "siswa-baru-proses.xlsx");
+    showToast(`${filteredData.length} data berhasil diexport`);
+  };
+
+  const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = new Uint8Array(event.target?.result as ArrayBuffer);
+        const wb = XLSX.read(data, { type: "array" });
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        const jsonData = XLSX.utils.sheet_to_json<Record<string, string>>(ws);
+
+        const imported: Siswa[] = jsonData.map((row, index) => ({
+          id: (siswaList.length > 0 ? Math.max(...siswaList.map((s) => s.id)) : 0) + index + 1,
+          nama: row["Nama"] || row["nama"] || "",
+          nis: row["NIS"] || row["nis"] || "",
+          kelas: row["Kelas"] || row["kelas"] || "",
+          jurusan: row["Jurusan"] || row["jurusan"] || "",
+          tglDaftar: row["Tgl. Daftar"] || row["tglDaftar"] || "",
+          status: row["Status"] || row["status"] || "Proses",
+        }));
+
+        showToast(`${imported.length} data berhasil diimport`);
+      } catch {
+        showToast("Gagal membaca file Excel", "error");
+      }
+    };
+    reader.readAsArrayBuffer(file);
+    e.target.value = "";
   };
 
   return (
     <div className="msb">
       <div className="msb-header">
         <h1 className="msb-title">{page.title}</h1>
-        <button className="msb-add-btn" type="button">
-          <Plus size={18} />
-          {page.addButtonLabel}
-        </button>
+        <div className="msb-header-actions">
+          <button className="msb-export-btn" type="button" onClick={handleExport}>
+            <Download size={16} />
+            Export Excel
+          </button>
+          <button className="msb-import-btn" type="button" onClick={() => fileInputRef.current?.click()}>
+            <Upload size={16} />
+            Import Excel
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept=".xlsx,.xls,.csv"
+            className="msb-file-input"
+            onChange={handleImport}
+          />
+          <button className="msb-add-btn" type="button">
+            <Plus size={18} />
+            {page.addButtonLabel}
+          </button>
+        </div>
       </div>
 
       <ToolbarSiswa

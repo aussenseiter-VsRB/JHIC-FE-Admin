@@ -2,13 +2,12 @@ import { Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 
 type User = {
   id: number;
-  nama: string;
   email: string;
   role: string;
   status: string;
 };
 
-type SortKey = "id" | "nama" | "email" | "role" | "status";
+type SortKey = "id" | "email" | "role" | "status";
 type SortDirection = "asc" | "desc";
 
 interface UserTableProps {
@@ -43,13 +42,9 @@ function UserTable({
         <tr>
           {columns.map((col) => {
             const sortKey = col.toLowerCase() as SortKey;
-            const isSortable = [
-              "id",
-              "nama",
-              "email",
-              "role",
-              "status",
-            ].includes(sortKey);
+            const isSortable = ["id", "email", "role", "status"].includes(
+              sortKey,
+            );
             return (
               <th
                 key={col}
@@ -79,7 +74,6 @@ function UserTable({
           userList.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.nama}</td>
               <td>{user.email}</td>
               <td>{user.role}</td>
               <td>
