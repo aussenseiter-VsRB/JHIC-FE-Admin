@@ -8,6 +8,7 @@ import {
   ClipboardCheck,
   UserPlus,
   Newspaper,
+  LogOut,
   ChevronDown,
 } from "lucide-react";
 import "./Sidebar.css";
@@ -102,6 +103,18 @@ function Sidebar() {
             </NavLink>
           ),
         )}
+
+        <div className="sidebar-spacer" />
+
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            `sidebar-link sidebar-link--logout${isActive ? " sidebar-link--active" : ""}`
+          }
+        >
+          <LogOut className="sidebar-icon" size={20} />
+          <span className="sidebar-label">Keluar</span>
+        </NavLink>
       </nav>
     </aside>
   );
