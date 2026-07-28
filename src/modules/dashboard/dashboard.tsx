@@ -1,59 +1,66 @@
-import { Users, UserCheck, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
+import { Users, UserCheck, Briefcase, GraduationCap, Monitor, Network, Calculator, Building2, TrendingUp, School } from "lucide-react";
 import pageData from "./dashboard.json";
 import "./css/dashboard.css";
 import HeroCard from "./components/HeroCard";
 import StatCard from "./components/StatCard";
 import ListCard from "./components/ListCard";
 import ChartCard from "./components/ChartCard";
+import ActionCard from "./components/ActionCard";
 
 function Dashboard() {
-  const { page, stats, actions, recentStudents } = pageData;
+  const { page, school, stats, programKeahlian, chart, actions, recentStudents } = pageData;
 
-  const icons = [Users, UserCheck, Briefcase, GraduationCap];
-  const colors = ["blue", "green", "amber", "purple"];
+  const statIcons = [Users, UserCheck, Briefcase, GraduationCap];
+  const statColors = ["blue", "green", "amber", "purple"];
+
+  const actionIconMap = [Users, Briefcase, GraduationCap, School];
+  const actionColors = ["blue", "green", "purple", "blue"];
+
+  const programIcons = [Monitor, Network, Calculator, Building2, TrendingUp] as const;
+  const programColors = ["#3b82f6", "#16a34a", "#f59e0b", "#a855f7", "#ef4444"];
+
+  const maxProgramSiswa = Math.max(...programKeahlian.map((p) => p.siswa));
 
   return (
     <div className="dashboard">
       <div className="dashboard-header">
-        <h1 className="dashboard-title">
-          {page.title} <span className="dashboard-subtitle">{page.welcome}</span>
-        </h1>
+        <div>
+          <h1 className="dashboard-title">{page.title}</h1>
+          <p className="dashboard-welcome">{page.welcome} — {school.tahunAjaran}</p>
+        </div>
+        <div className="dashboard-header-badge">
+          <span className="dashboard-akreditasi">Akreditasi {school.akreditasi}</span>
+        </div>
       </div>
 
       <div className="dashboard-bento">
         <HeroCard
-          label="Ringkasan Sekolah"
-          value="SMK Nusantara"
-          description="Sistem informasi manajemen sekolah terpadu"
+          label=""
+          value={school.name}
+          description={school.tagline}
         >
-          <div className="dashboard-action-list">
-            {actions.map((action, index) => (
-              <div
-                key={`${action.label}-${index}`}
-                className="dashboard-action-item"
-                onClick={() => window.location.href = action.href}
-              >
-                <div className={`dashboard-action-icon dashboard-action-icon--${colors[index % colors.length]}`}>
-                  {index === 0 && <Users size={18} />}
-                  {index === 1 && <Briefcase size={18} />}
-                  {index === 2 && <GraduationCap size={18} />}
-                </div>
-                <div className="dashboard-action-text">
-                  <span className="dashboard-action-label">{action.label}</span>
-                  <span className="dashboard-action-desc">{action.description}</span>
-                </div>
-                <ArrowRight size={16} className="dashboard-action-arrow" />
-              </div>
-            ))}
+          <div className="dashboard-hero-stats">
+            <div className="dashboard-hero-stat">
+              <span className="dashboard-hero-stat-value">{stats[0].value}</span>
+              <span className="dashboard-hero-stat-label">Total Siswa</span>
+            </div>
+            <div className="dashboard-hero-stat">
+              <span className="dashboard-hero-stat-value">{programKeahlian.length}</span>
+              <span className="dashboard-hero-stat-label">Program</span>
+            </div>
+            <div className="dashboard-hero-stat">
+              <span className="dashboard-hero-stat-value">{Math.ceil(stats[0].value / 36)}</span>
+              <span className="dashboard-hero-stat-label">Rombel</span>
+            </div>
           </div>
         </HeroCard>
 
         {stats.map((stat, index) => (
           <StatCard
-            key={`${stat.label}-${index}`}
-            icon={icons[index]}
-            iconColor={colors[index]}
-            progressColor={colors[index]}
+            key={stat.label}
+            icon={statIcons[index]}
+            iconColor={statColors[index]}
+            progressColor={statColors[index]}
             label={stat.label}
             value={stat.value}
             sub={stat.sub}
@@ -61,22 +68,64 @@ function Dashboard() {
           />
         ))}
 
-        <ChartCard title="Statistik Pendaftar" subtitle="6 bulan terakhir">
-          <div style={{ display: "flex", alignItems: "flex-end", gap: "8px", height: "100%", padding: "16px 0" }}>
-            {[65, 45, 80, 55, 90, 70].map((height, index) => (
-              <div
-                key={`bar-${index}`}
-                style={{
-                  width: "24px",
-                  height: `${height}%`,
-                  backgroundColor: index === 4 ? "#3b82f6" : "#e2e8f0",
-                  borderRadius: "4px 4px 0 0",
-                  transition: "background-color 0.2s"
-                }}
-              />
+        <ChartCard title={chart.title} subtitle={chart.subtitle}>
+          <div className="dashboard-chart-bars">
+            {chart.bars.map((bar) => (
+              <div key={bar.label} className="dashboard-chart-bar-group">
+                <span className="dashboard-chart-bar-label">{bar.label}</span>
+                <div className="dashboard-chart-bar-track">
+                  <div
+                    className="dashboard-chart-bar-fill"
+                    style={{ height: `${bar.value}%` }}
+                  />
+                </div>
+                <span className="dashboard-chart-bar-value">{bar.value}</span>
+              </div>
             ))}
           </div>
         </ChartCard>
+
+        <div className="dashboard-card dashboard-card--program">
+          <div className="dashboard-card-header">
+            <span className="dashboard-card-title">Program Keahlian</span>
+          </div>
+          <div className="dashboard-program-list">
+            {programKeahlian.map((prog, idx) => (
+              <div key={prog.singkatan} className="dashboard-program-item">
+                <div className="dashboard-program-icon" style={{ color: programColors[idx] }}>
+                  {(() => {
+                    const Icon = programIcons[idx % programIcons.length];
+                    return <Icon size={18} />;
+                  })()}
+                </div>
+                <div className="dashboard-program-info">
+                  <div className="dashboard-program-top">
+                    <span className="dashboard-program-name">{prog.singkatan}</span>
+                    <span className="dashboard-program-count">{prog.siswa}</span>
+                  </div>
+                  <div className="dashboard-program-bar">
+                    <div
+                      className="dashboard-program-bar-fill"
+                      style={{ width: `${(prog.siswa / maxProgramSiswa) * 100}%`, backgroundColor: programColors[idx] }}
+                    />
+                  </div>
+                  <span className="dashboard-program-fullname">{prog.name}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <ActionCard
+          title="Akses Cepat"
+          items={actions.map((action, i) => ({
+            icon: actionIconMap[i % actionIconMap.length],
+            iconColor: actionColors[i % actionColors.length],
+            label: action.label,
+            description: action.description,
+            onClick: () => { window.location.href = action.href; },
+          }))}
+        />
 
         <ListCard
           title="Siswa Terbaru"
@@ -85,7 +134,7 @@ function Dashboard() {
             name: s.name,
             detail: s.detail,
             badge: s.badge,
-            badgeVariant: s.badge === "Aktif" ? "success" : s.badge === "PKL" ? "warning" : "info"
+            badgeVariant: s.badge === "Aktif" ? "success" : s.badge === "Prakerin" ? "warning" : "info",
           }))}
           onMore={() => window.location.href = "/manajemen-user"}
         />

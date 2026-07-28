@@ -1,56 +1,89 @@
 {
   "page": {
     "title": "Dashboard",
-    "welcome": "Selamat datang kembali"
+    "welcome": "SMK Yadika Soreang"
+  },
+  "school": {
+    "name": "SMK Yadika Soreang",
+    "tagline": "Unggul dalam Prestasi, Berkarakter dalam Tindakan",
+    "akreditasi": "A",
+    "tahunAjaran": "2025/2026",
+    "address": "Jl. Raya Soreang No. 123, Soreang, Bandung"
   },
   "stats": [
     {
       "label": "Total Siswa",
-      "value": 1248,
-      "sub": "+12% dari bulan lalu",
-      "progressPercent": 85
+      "value": 540,
+      "sub": "3 program keahlian",
+      "progressPercent": 85,
+      "description": "Tiga program keahlian unggulan"
     },
     {
       "label": "Siswa Aktif",
-      "value": 1102,
-      "sub": "88% dari total",
-      "progressPercent": 88
+      "value": 503,
+      "sub": "93% dari total",
+      "progressPercent": 93,
+      "description": "Kehadiran rata-rata harian"
     },
     {
-      "label": "Program PKL",
-      "value": 86,
-      "sub": "12 mitra aktif",
-      "progressPercent": 72
+      "label": "Prakerin",
+      "value": 89,
+      "sub": "12 mitra DU/DI",
+      "progressPercent": 72,
+      "description": "Sedang menjalani praktik kerja"
     },
     {
-      "label": "PPDB Diterima",
-      "value": 342,
-      "sub": "dari 500 kuota",
-      "progressPercent": 68
+      "label": "PPDB",
+      "value": 284,
+      "sub": "dari 350 kuota tersedia",
+      "progressPercent": 81,
+      "description": "Pendaftaran tahun ajaran baru"
     }
   ],
+  "programKeahlian": [
+    { "name": "Pengembangan Perangkat Lunak dan Gim", "singkatan": "PPLG", "siswa": 218 },
+    { "name": "Akuntansi dan Keuangan Lembaga", "singkatan": "Akuntansi", "siswa": 174 },
+    { "name": "Hotel", "singkatan": "Hotel", "siswa": 148 }
+  ],
+  "chart": {
+    "title": "Statistik Pendaftar PPDB",
+    "subtitle": "Gelombang 1 - 5 (2026)",
+    "bars": [
+      { "label": "Gel 1", "value": 65 },
+      { "label": "Gel 2", "value": 78 },
+      { "label": "Gel 3", "value": 52 },
+      { "label": "Gel 4", "value": 89 },
+      { "label": "Gel 5", "value": 64 }
+    ]
+  },
   "actions": [
     {
       "label": "Manajemen User",
-      "description": "Kelola akun siswa & admin",
+      "description": "Kelola akun siswa & staf",
       "href": "/manajemen-user"
     },
     {
       "label": "Manajemen PKL",
-      "description": "Pantau data praktik kerja lapangan",
+      "description": "Pantau data praktik kerja",
       "href": "/manajemen-pkl"
     },
     {
       "label": "Status PPDB",
-      "description": "Atur status pendaftaran PPDB",
+      "description": "Atur status pendaftaran",
       "href": "/status-ppdb"
+    },
+    {
+      "label": "Siswa Baru",
+      "description": "Proses pendaftar baru",
+      "href": "/manajemen-siswa-baru/proses"
     }
   ],
   "recentStudents": [
-    { "name": "Ahmad Fauzi", "detail": "XI TKJ 2", "badge": "Aktif" },
-    { "name": "Siti Nurhaliza", "detail": "XII RPL 1", "badge": "PKL" },
+    { "name": "Ahmad Fauzi", "detail": "XI RPL 2", "badge": "Aktif" },
+    { "name": "Siti Nurhaliza", "detail": "XII AKL 1", "badge": "Prakerin" },
     { "name": "Budi Santoso", "detail": "XI TKJ 1", "badge": "Aktif" },
-    { "name": "Dewi Lestari", "detail": "XII RPL 2", "badge": "PPDB" },
-    { "name": "Eko Prasetyo", "detail": "X TKJ 1", "badge": "Aktif" }
+    { "name": "Dewi Lestari", "detail": "XII OTKP 2", "badge": "Aktif" },
+    { "name": "Eko Prasetyo", "detail": "X BDP 1", "badge": "Baru" },
+    { "name": "Fitri Handayani", "detail": "XI AKL 1", "badge": "Aktif" }
   ]
 }

@@ -4,22 +4,41 @@
 
 .dashboard-header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .dashboard-title {
   margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-size: 26px;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: -0.02em;
 }
 
-.dashboard-subtitle {
+.dashboard-welcome {
+  margin: 4px 0 0;
   font-size: 14px;
   color: #64748b;
   font-weight: 400;
+}
+
+.dashboard-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard-akreditasi {
+  display: inline-flex;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #1a1a2e;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
 }
 
 .dashboard-bento {
@@ -33,14 +52,27 @@
   background: #ffffff;
   border-radius: 12px;
   padding: 24px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   border: 1px solid #f1f5f9;
   transition: box-shadow 0.2s, border-color 0.2s;
 }
 
 .dashboard-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border-color: #e2e8f0;
+}
+
+.dashboard-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.dashboard-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
 }
 
 .dashboard-card--hero {
@@ -52,32 +84,70 @@
   padding: 32px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%);
+  background: linear-gradient(135deg, #0f2b4b 0%, #1e3a5f 40%, #2a4a7f 100%);
+  border: none;
+  box-shadow: 0 4px 20px rgba(30, 58, 95, 0.2);
+}
+
+.dashboard-card--hero::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dashboard-card--hero::after {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dashboard-card--hero:hover {
+  box-shadow: 0 8px 30px rgba(30, 58, 95, 0.3);
+  border: none;
 }
 
 .dashboard-hero-top {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
 }
 
 .dashboard-hero-label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
-  color: #64748b;
+  color: rgba(255, 255, 255, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .dashboard-hero-value {
-  font-size: 36px;
-  font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1.1;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
 .dashboard-hero-desc {
   font-size: 14px;
-  color: #94a3b8;
+  color: rgba(255, 255, 255, 0.65);
   margin-top: 4px;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .dashboard-hero-bottom {
@@ -86,6 +156,32 @@
   gap: 16px;
   margin-top: auto;
   padding-top: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-hero-stats {
+  display: flex;
+  gap: 32px;
+}
+
+.dashboard-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dashboard-hero-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+}
+
+.dashboard-hero-stat-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 500;
 }
 
 .dashboard-card--stat {
@@ -123,11 +219,6 @@
   color: #a855f7;
 }
 
-.dashboard-stat-icon--red {
-  background-color: #fef2f2;
-  color: #ef4444;
-}
-
 .dashboard-stat-content {
   display: flex;
   flex-direction: column;
@@ -143,7 +234,7 @@
 .dashboard-stat-value {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #1a1a2e;
   line-height: 1.2;
 }
 
@@ -184,10 +275,6 @@
   background-color: #a855f7;
 }
 
-.dashboard-progress-bar--red {
-  background-color: #ef4444;
-}
-
 .dashboard-card--chart {
   display: flex;
   flex-direction: column;
@@ -204,7 +291,7 @@
 .dashboard-chart-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #1a1a2e;
 }
 
 .dashboard-chart-subtitle {
@@ -215,22 +302,145 @@
 .dashboard-chart-content {
   flex: 1;
   display: flex;
+  align-items: flex-end;
+}
+
+.dashboard-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  height: 100%;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.dashboard-chart-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+.dashboard-chart-bar-label {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: auto;
+}
+
+.dashboard-chart-bar-track {
+  width: 28px;
+  height: 120px;
+  background-color: #f1f5f9;
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.dashboard-chart-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #3b82f6, #60a5fa);
+  border-radius: 6px 6px 0 0;
+  transition: height 0.5s ease;
+  min-height: 4px;
+}
+
+.dashboard-chart-bar-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.dashboard-card--program {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dashboard-program-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dashboard-program-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.dashboard-program-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-program-icon {
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.dashboard-program-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.dashboard-program-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard-program-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a1a2e;
+}
+
+.dashboard-program-count {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.dashboard-program-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #f1f5f9;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.dashboard-program-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+.dashboard-program-fullname {
+  font-size: 11px;
   color: #94a3b8;
-  font-size: 14px;
 }
 
 .dashboard-card--action {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .dashboard-action-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #1a1a2e;
 }
 
 .dashboard-action-list {
@@ -281,6 +491,11 @@
   color: #f59e0b;
 }
 
+.dashboard-action-icon--purple {
+  background-color: #faf5ff;
+  color: #a855f7;
+}
+
 .dashboard-action-text {
   display: flex;
   flex-direction: column;
@@ -289,7 +504,7 @@
 .dashboard-action-label {
   font-size: 13px;
   font-weight: 500;
-  color: #1a1a1a;
+  color: #1a1a2e;
 }
 
 .dashboard-action-desc {
@@ -317,7 +532,7 @@
 .dashboard-list-title {
   font-size: 14px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #1a1a2e;
 }
 
 .dashboard-list-more {
@@ -354,13 +569,13 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #f1f5f9;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 600;
-  color: #64748b;
+  color: #4338ca;
   flex-shrink: 0;
 }
 
@@ -373,7 +588,7 @@
 .dashboard-list-name {
   font-size: 13px;
   font-weight: 500;
-  color: #1a1a1a;
+  color: #1a1a2e;
 }
 
 .dashboard-list-detail {
@@ -399,7 +614,7 @@
 }
 
 .dashboard-list-badge--info {
-  background-color: #eff6ff;
+  background-color: #dbeafe;
   color: #1e40af;
 }
 
@@ -417,5 +632,14 @@
 @media (max-width: 540px) {
   .dashboard-bento {
     grid-template-columns: 1fr;
+  }
+  
+  .dashboard-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .dashboard-hero-stats {
+    gap: 20px;
   }
 }
