@@ -9,10 +9,12 @@ function BuatBerita() {
   const { page, form, history, riwayat } = pageData;
 
   const [author, setAuthor] = useState("");
-  const [content, setContent] = useState("");
+  const [awal, setAwal] = useState("");
+  const [orientasi, setOrientasi] = useState("");
+  const [penutup, setPenutup] = useState("");
 
   const handleSubmit = () => {
-    console.log({ author, content });
+    console.log({ author, awal, orientasi, penutup });
   };
 
   return (
@@ -24,13 +26,21 @@ function BuatBerita() {
       <div className="buat-berita-bento">
         <FormBerita
           author={author}
-          content={content}
+          awal={awal}
+          orientasi={orientasi}
+          penutup={penutup}
           onAuthorChange={(e) => setAuthor(e.target.value)}
-          onContentChange={(e) => setContent(e.target.value)}
+          onAwalChange={(e) => setAwal(e.target.value)}
+          onOrientasiChange={(e) => setOrientasi(e.target.value)}
+          onPenutupChange={(e) => setPenutup(e.target.value)}
           authorLabel={form.authorLabel}
           authorPlaceholder={form.authorPlaceholder}
-          contentLabel={form.contentLabel}
-          contentPlaceholder={form.contentPlaceholder}
+          awalLabel={form.awalLabel}
+          awalPlaceholder={form.awalPlaceholder}
+          orientasiLabel={form.orientasiLabel}
+          orientasiPlaceholder={form.orientasiPlaceholder}
+          penutupLabel={form.penutupLabel}
+          penutupPlaceholder={form.penutupPlaceholder}
           submitLabel={form.submitLabel}
           onSubmit={handleSubmit}
         />

@@ -3,26 +3,42 @@ import { FileText } from "lucide-react";
 
 interface FormBeritaProps {
   author: string;
-  content: string;
+  awal: string;
+  orientasi: string;
+  penutup: string;
   onAuthorChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onAwalChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onOrientasiChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onPenutupChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   authorPlaceholder: string;
-  contentPlaceholder: string;
   authorLabel: string;
-  contentLabel: string;
+  awalLabel: string;
+  awalPlaceholder: string;
+  orientasiLabel: string;
+  orientasiPlaceholder: string;
+  penutupLabel: string;
+  penutupPlaceholder: string;
   submitLabel: string;
   onSubmit: () => void;
 }
 
 function FormBerita({
   author,
-  content,
+  awal,
+  orientasi,
+  penutup,
   onAuthorChange,
-  onContentChange,
+  onAwalChange,
+  onOrientasiChange,
+  onPenutupChange,
   authorPlaceholder,
-  contentPlaceholder,
   authorLabel,
-  contentLabel,
+  awalLabel,
+  awalPlaceholder,
+  orientasiLabel,
+  orientasiPlaceholder,
+  penutupLabel,
+  penutupPlaceholder,
   submitLabel,
   onSubmit,
 }: FormBeritaProps) {
@@ -51,15 +67,43 @@ function FormBerita({
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="content" className="text-sm font-medium text-[#1a1a2e]">
-            {contentLabel}
+          <label htmlFor="awal" className="text-sm font-medium text-[#1a1a2e]">
+            {awalLabel}
           </label>
           <textarea
-            id="content"
-            rows={6}
-            value={content}
-            onChange={onContentChange}
-            placeholder={contentPlaceholder}
+            id="awal"
+            rows={4}
+            value={awal}
+            onChange={onAwalChange}
+            placeholder={awalPlaceholder}
+            className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="orientasi" className="text-sm font-medium text-[#1a1a2e]">
+            {orientasiLabel}
+          </label>
+          <textarea
+            id="orientasi"
+            rows={4}
+            value={orientasi}
+            onChange={onOrientasiChange}
+            placeholder={orientasiPlaceholder}
+            className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
+          />
+        </div>
+
+        <div className="flex flex-col gap-1.5">
+          <label htmlFor="penutup" className="text-sm font-medium text-[#1a1a2e]">
+            {penutupLabel}
+          </label>
+          <textarea
+            id="penutup"
+            rows={4}
+            value={penutup}
+            onChange={onPenutupChange}
+            placeholder={penutupPlaceholder}
             className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
           />
         </div>
