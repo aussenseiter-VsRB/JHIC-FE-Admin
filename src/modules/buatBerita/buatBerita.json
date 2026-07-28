@@ -3,14 +3,10 @@
     "title": "Buat Berita"
   },
   "form": {
-    "authorLabel": "Nama Penulis",
-    "authorPlaceholder": "Masukkan nama penulis",
-    "awalLabel": "Awal",
-    "awalPlaceholder": "Tulis paragraf awal...",
-    "orientasiLabel": "Orientasi",
-    "orientasiPlaceholder": "Tulis paragraf orientasi...",
-    "penutupLabel": "Penutup",
-    "penutupPlaceholder": "Tulis paragraf penutup...",
+    "authorLabel": "Penulis",
+    "authorOptions": ["Admin Sekolah", "Jurnalistik Mata Muda"],
+    "contentLabel": "Berita",
+    "contentPlaceholder": "Tulis berita di sini...",
     "uploadLabel": "Upload Foto",
     "uploadHint": "Format: JPG, PNG. Maks 2MB",
     "submitLabel": "Simpan"

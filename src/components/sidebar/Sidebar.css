@@ -36,6 +36,7 @@
   flex-direction: column;
   gap: 4px;
   padding: 12px 8px;
+  flex: 1;
 }
 
 .sidebar-link {
@@ -146,4 +147,19 @@
 
 .sidebar-sublink--active:hover {
   background-color: #93c5fd;
+}
+
+.sidebar-spacer {
+  flex: 1;
+}
+
+.sidebar-link--logout {
+  border-top: 1px solid #e0e0e0;
+  margin-top: 4px;
+  color: #dc2626;
+}
+
+.sidebar-link--logout:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
 }

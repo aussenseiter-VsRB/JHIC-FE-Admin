@@ -4,24 +4,22 @@
     "addButtonLabel": "Tambah User"
   },
   "users": [
-    { "id": 1, "nama": "Budi Santoso", "email": "budi@example.com", "role": "Admin", "status": "Active" },
-    { "id": 2, "nama": "Siti Rahayu", "email": "siti@example.com", "role": "User", "status": "Active" },
-    { "id": 3, "nama": "Andi Wijaya", "email": "andi@example.com", "role": "User", "status": "Inactive" },
-    { "id": 4, "nama": "Dewi Lestari", "email": "dewi@example.com", "role": "Editor", "status": "Active" },
-    { "id": 5, "nama": "Rizky Pratama", "email": "rizky@example.com", "role": "User", "status": "Inactive" },
-    { "id": 6, "nama": "Maya Putri", "email": "maya@example.com", "role": "Admin", "status": "Active" },
-    { "id": 7, "nama": "Fajar Nugroho", "email": "fajar@example.com", "role": "Editor", "status": "Active" },
-    { "id": 8, "nama": "Rina Marlina", "email": "rina@example.com", "role": "User", "status": "Inactive" },
-    { "id": 9, "nama": "Dimas Aditya", "email": "dimas@example.com", "role": "User", "status": "Active" },
-    { "id": 10, "nama": "Lestari Budiman", "email": "lestari@example.com", "role": "Editor", "status": "Active" },
-    { "id": 11, "nama": "Hendra Wijaya", "email": "hendra@example.com", "role": "User", "status": "Inactive" },
-    { "id": 12, "nama": "Ayu Permata", "email": "ayu@example.com", "role": "Admin", "status": "Active" }
+    { "id": 1, "email": "admin1@example.com", "role": "Admin", "status": "Active" },
+    { "id": 2, "email": "jurnal1@example.com", "role": "Jurnal", "status": "Active" },
+    { "id": 3, "email": "guru1@example.com", "role": "Guru", "status": "Active" },
+    { "id": 4, "email": "guru2@example.com", "role": "Guru", "status": "Inactive" },
+    { "id": 5, "email": "admin2@example.com", "role": "Admin", "status": "Active" },
+    { "id": 6, "email": "jurnal2@example.com", "role": "Jurnal", "status": "Inactive" },
+    { "id": 7, "email": "guru3@example.com", "role": "Guru", "status": "Active" },
+    { "id": 8, "email": "admin3@example.com", "role": "Admin", "status": "Inactive" },
+    { "id": 9, "email": "jurnal3@example.com", "role": "Jurnal", "status": "Active" },
+    { "id": 10, "email": "guru4@example.com", "role": "Guru", "status": "Active" }
   ],
   "table": {
-    "columns": ["ID", "Nama", "Email", "Role", "Status", "Action"]
+    "columns": ["ID", "Email", "Role", "Status", "Action"]
   },
   "filters": {
-    "roles": ["All", "Admin", "Editor", "User"],
+    "roles": ["All", "Admin", "Jurnal", "Guru"],
     "statuses": ["All", "Active", "Inactive"]
   },
   "pagination": {

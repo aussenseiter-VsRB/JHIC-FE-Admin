@@ -8,7 +8,7 @@ import Toast from "../../components/Toast";
 import Pagination from "../../components/Pagination";
 
 type User = (typeof pageData.users)[number];
-type SortKey = "id" | "nama" | "email" | "role" | "status";
+type SortKey = "id" | "email" | "role" | "status";
 type SortDirection = "asc" | "desc";
 
 interface SortConfig {
@@ -41,10 +41,8 @@ function ManajemenUser() {
 
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (u) =>
-          u.nama.toLowerCase().includes(query) ||
-          u.email.toLowerCase().includes(query),
+      result = result.filter((u) =>
+        u.email.toLowerCase().includes(query),
       );
     }
 
@@ -89,11 +87,11 @@ function ManajemenUser() {
   };
 
   const handleEdit = (user: User) => {
-    showToast(`Mengedit user: ${user.nama}`);
+    showToast(`Mengedit user: ${user.email}`);
   };
 
   const handleDelete = (user: User) => {
-    showToast(`User "${user.nama}" berhasil dihapus`);
+    showToast(`User "${user.email}" berhasil dihapus`);
   };
 
   return (

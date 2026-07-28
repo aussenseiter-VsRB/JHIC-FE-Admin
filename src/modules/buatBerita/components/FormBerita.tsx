@@ -3,42 +3,26 @@ import { FileText } from "lucide-react";
 
 interface FormBeritaProps {
   author: string;
-  awal: string;
-  orientasi: string;
-  penutup: string;
-  onAuthorChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onAwalChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onOrientasiChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  onPenutupChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  authorPlaceholder: string;
+  content: string;
+  onAuthorChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  authorOptions: string[];
   authorLabel: string;
-  awalLabel: string;
-  awalPlaceholder: string;
-  orientasiLabel: string;
-  orientasiPlaceholder: string;
-  penutupLabel: string;
-  penutupPlaceholder: string;
+  contentLabel: string;
+  contentPlaceholder: string;
   submitLabel: string;
   onSubmit: () => void;
 }
 
 function FormBerita({
   author,
-  awal,
-  orientasi,
-  penutup,
+  content,
   onAuthorChange,
-  onAwalChange,
-  onOrientasiChange,
-  onPenutupChange,
-  authorPlaceholder,
+  onContentChange,
+  authorOptions,
   authorLabel,
-  awalLabel,
-  awalPlaceholder,
-  orientasiLabel,
-  orientasiPlaceholder,
-  penutupLabel,
-  penutupPlaceholder,
+  contentLabel,
+  contentPlaceholder,
   submitLabel,
   onSubmit,
 }: FormBeritaProps) {
@@ -56,54 +40,28 @@ function FormBerita({
           <label htmlFor="author" className="text-sm font-medium text-[#1a1a2e]">
             {authorLabel}
           </label>
-          <input
+          <select
             id="author"
-            type="text"
             value={author}
             onChange={onAuthorChange}
-            placeholder={authorPlaceholder}
             className="rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
-          />
+          >
+            {authorOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}</option>
+            ))}
+          </select>
         </div>
 
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="awal" className="text-sm font-medium text-[#1a1a2e]">
-            {awalLabel}
+          <label htmlFor="content" className="text-sm font-medium text-[#1a1a2e]">
+            {contentLabel}
           </label>
           <textarea
-            id="awal"
-            rows={4}
-            value={awal}
-            onChange={onAwalChange}
-            placeholder={awalPlaceholder}
-            className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="orientasi" className="text-sm font-medium text-[#1a1a2e]">
-            {orientasiLabel}
-          </label>
-          <textarea
-            id="orientasi"
-            rows={4}
-            value={orientasi}
-            onChange={onOrientasiChange}
-            placeholder={orientasiPlaceholder}
-            className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
-          />
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="penutup" className="text-sm font-medium text-[#1a1a2e]">
-            {penutupLabel}
-          </label>
-          <textarea
-            id="penutup"
-            rows={4}
-            value={penutup}
-            onChange={onPenutupChange}
-            placeholder={penutupPlaceholder}
+            id="content"
+            rows={8}
+            value={content}
+            onChange={onContentChange}
+            placeholder={contentPlaceholder}
             className="resize-none rounded-lg border border-[#f1f5f9] bg-[#fafbfc] px-3.5 py-2.5 text-sm text-[#1a1a2e] outline-none transition-colors focus:border-[#3b82f6] focus:bg-white"
           />
         </div>

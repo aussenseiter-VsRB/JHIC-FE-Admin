@@ -28,7 +28,7 @@ function UserToolbar({
         <input
           className="manajemen-user-search-input"
           type="text"
-          placeholder="Cari nama atau email..."
+          placeholder="Cari email..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
         />

@@ -8,13 +8,11 @@ import RiwayatBerita from "./components/RiwayatBerita";
 function BuatBerita() {
   const { page, form, history, riwayat } = pageData;
 
-  const [author, setAuthor] = useState("");
-  const [awal, setAwal] = useState("");
-  const [orientasi, setOrientasi] = useState("");
-  const [penutup, setPenutup] = useState("");
+  const [author, setAuthor] = useState(form.authorOptions[0]);
+  const [content, setContent] = useState("");
 
   const handleSubmit = () => {
-    console.log({ author, awal, orientasi, penutup });
+    console.log({ author, content });
   };
 
   return (
@@ -26,21 +24,13 @@ function BuatBerita() {
       <div className="buat-berita-bento">
         <FormBerita
           author={author}
-          awal={awal}
-          orientasi={orientasi}
-          penutup={penutup}
+          content={content}
           onAuthorChange={(e) => setAuthor(e.target.value)}
-          onAwalChange={(e) => setAwal(e.target.value)}
-          onOrientasiChange={(e) => setOrientasi(e.target.value)}
-          onPenutupChange={(e) => setPenutup(e.target.value)}
+          onContentChange={(e) => setContent(e.target.value)}
           authorLabel={form.authorLabel}
-          authorPlaceholder={form.authorPlaceholder}
-          awalLabel={form.awalLabel}
-          awalPlaceholder={form.awalPlaceholder}
-          orientasiLabel={form.orientasiLabel}
-          orientasiPlaceholder={form.orientasiPlaceholder}
-          penutupLabel={form.penutupLabel}
-          penutupPlaceholder={form.penutupPlaceholder}
+          authorOptions={form.authorOptions}
+          contentLabel={form.contentLabel}
+          contentPlaceholder={form.contentPlaceholder}
           submitLabel={form.submitLabel}
           onSubmit={handleSubmit}
         />
