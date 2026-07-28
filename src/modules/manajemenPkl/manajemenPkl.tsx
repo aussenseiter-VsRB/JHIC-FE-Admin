@@ -124,7 +124,7 @@ function ManajemenPkl() {
         const ws = wb.Sheets[wb.SheetNames[0]];
         const jsonData = XLSX.utils.sheet_to_json<Record<string, string>>(ws);
 
-        const imported: Siswa[] = jsonData.map((row, index) => ({
+        const imported: Siswa[] = jsonData.map((row: Record<string, string>, index: number) => ({
           id: (siswaList.length > 0 ? Math.max(...siswaList.map((s) => s.id)) : 0) + index + 1,
           nama: row["Nama"] || row["nama"] || "",
           nis: row["NIS"] || row["nis"] || "",
