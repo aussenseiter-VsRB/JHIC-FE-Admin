@@ -1,0 +1,24 @@
+{
+  "page": {
+    "title": "Siswa Baru — Cancel",
+    "addButtonLabel": "Tambah Siswa"
+  },
+  "siswa": [
+    { "id": 201, "nama": "Mega Wati", "nis": "2025201", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-06-01", "status": "Cancel" },
+    { "id": 202, "nama": "Nanda Putra", "nis": "2025202", "kelas": "X", "jurusan": "Hotel", "tglDaftar": "2026-06-02", "status": "Cancel" },
+    { "id": 203, "nama": "Oscar Maulana", "nis": "2025203", "kelas": "X", "jurusan": "Akuntansi", "tglDaftar": "2026-06-03", "status": "Cancel" },
+    { "id": 204, "nama": "Putri Ayu", "nis": "2025204", "kelas": "X", "jurusan": "DPIB", "tglDaftar": "2026-06-04", "status": "Cancel" },
+    { "id": 205, "nama": "Qori Amelia", "nis": "2025205", "kelas": "X", "jurusan": "Mesin", "tglDaftar": "2026-06-05", "status": "Cancel" },
+    { "id": 206, "nama": "Raka Pratama", "nis": "2025206", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-06-06", "status": "Cancel" }
+  ],
+  "table": {
+    "columns": ["ID", "Nama", "NIS", "Kelas", "Jurusan", "Tgl. Daftar", "Status", "Action"]
+  },
+  "filters": {
+    "jurusan": ["All", "PPLG", "Hotel", "Akuntansi", "DPIB", "Mesin"],
+    "statuses": ["All", "Cancel"]
+  },
+  "pagination": {
+    "perPage": 5
+  }
+}

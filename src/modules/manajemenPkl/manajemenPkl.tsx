@@ -101,7 +101,10 @@ function ManajemenPkl() {
   };
 
   const handleExport = () => {
-    const exportData = filteredSiswa.map(({ id: _, ...rest }) => rest);
+    const exportData = filteredSiswa.map(({ id: _id, ...rest }) => {
+      void _id;
+      return rest;
+    });
     const ws = XLSX.utils.json_to_sheet(exportData);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Data Siswa");

@@ -1,0 +1,26 @@
+{
+  "page": {
+    "title": "Siswa Baru — Proses",
+    "addButtonLabel": "Tambah Siswa"
+  },
+  "siswa": [
+    { "id": 1, "nama": "Ahmad Fauzi", "nis": "2025001", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-07-01", "status": "Proses" },
+    { "id": 2, "nama": "Dina Marlina", "nis": "2025002", "kelas": "X", "jurusan": "Hotel", "tglDaftar": "2026-07-02", "status": "Proses" },
+    { "id": 3, "nama": "Rudi Hartono", "nis": "2025003", "kelas": "X", "jurusan": "Akuntansi", "tglDaftar": "2026-07-03", "status": "Proses" },
+    { "id": 4, "nama": "Sari Dewi", "nis": "2025004", "kelas": "X", "jurusan": "DPIB", "tglDaftar": "2026-07-04", "status": "Proses" },
+    { "id": 5, "nama": "Bambang Suprapto", "nis": "2025005", "kelas": "X", "jurusan": "Mesin", "tglDaftar": "2026-07-05", "status": "Proses" },
+    { "id": 6, "nama": "Fitri Handayani", "nis": "2025006", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-07-06", "status": "Proses" },
+    { "id": 7, "nama": "Agus Prasetyo", "nis": "2025007", "kelas": "X", "jurusan": "Hotel", "tglDaftar": "2026-07-07", "status": "Proses" },
+    { "id": 8, "nama": "Ratna Kusuma", "nis": "2025008", "kelas": "X", "jurusan": "Akuntansi", "tglDaftar": "2026-07-08", "status": "Proses" }
+  ],
+  "table": {
+    "columns": ["ID", "Nama", "NIS", "Kelas", "Jurusan", "Tgl. Daftar", "Status", "Action"]
+  },
+  "filters": {
+    "jurusan": ["All", "PPLG", "Hotel", "Akuntansi", "DPIB", "Mesin"],
+    "statuses": ["All", "Proses"]
+  },
+  "pagination": {
+    "perPage": 5
+  }
+}

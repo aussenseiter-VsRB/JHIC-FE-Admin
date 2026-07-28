@@ -1,0 +1,28 @@
+{
+  "page": {
+    "title": "Siswa Baru — Approve",
+    "addButtonLabel": "Tambah Siswa"
+  },
+  "siswa": [
+    { "id": 101, "nama": "Citra Lestari", "nis": "2025101", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-06-15", "status": "Approve" },
+    { "id": 102, "nama": "Doni Setiawan", "nis": "2025102", "kelas": "X", "jurusan": "Hotel", "tglDaftar": "2026-06-16", "status": "Approve" },
+    { "id": 103, "nama": "Eka Pratiwi", "nis": "2025103", "kelas": "X", "jurusan": "Akuntansi", "tglDaftar": "2026-06-17", "status": "Approve" },
+    { "id": 104, "nama": "Feri Ardiansyah", "nis": "2025104", "kelas": "X", "jurusan": "DPIB", "tglDaftar": "2026-06-18", "status": "Approve" },
+    { "id": 105, "nama": "Gita Permata", "nis": "2025105", "kelas": "X", "jurusan": "Mesin", "tglDaftar": "2026-06-19", "status": "Approve" },
+    { "id": 106, "nama": "Hadi Pranoto", "nis": "2025106", "kelas": "X", "jurusan": "PPLG", "tglDaftar": "2026-06-20", "status": "Approve" },
+    { "id": 107, "nama": "Indah Safitri", "nis": "2025107", "kelas": "X", "jurusan": "Hotel", "tglDaftar": "2026-06-21", "status": "Approve" },
+    { "id": 108, "nama": "Joko Widodo", "nis": "2025108", "kelas": "X", "jurusan": "Akuntansi", "tglDaftar": "2026-06-22", "status": "Approve" },
+    { "id": 109, "nama": "Kartika Sari", "nis": "2025109", "kelas": "X", "jurusan": "DPIB", "tglDaftar": "2026-06-23", "status": "Approve" },
+    { "id": 110, "nama": "Lukman Hakim", "nis": "2025110", "kelas": "X", "jurusan": "Mesin", "tglDaftar": "2026-06-24", "status": "Approve" }
+  ],
+  "table": {
+    "columns": ["ID", "Nama", "NIS", "Kelas", "Jurusan", "Tgl. Daftar", "Status", "Action"]
+  },
+  "filters": {
+    "jurusan": ["All", "PPLG", "Hotel", "Akuntansi", "DPIB", "Mesin"],
+    "statuses": ["All", "Approve"]
+  },
+  "pagination": {
+    "perPage": 5
+  }
+}

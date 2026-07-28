@@ -5,6 +5,9 @@ import ManajemenUser from "../modules/manajemenUser/manajemenUser";
 import ManajemenPkl from "../modules/manajemenPkl/manajemenPkl";
 import StatusPpdb from "../modules/statusPpdb/statusPpdb";
 import Login from "../modules/login/login";
+import Proses from "../modules/manajemenSiswaBaru/proses/page";
+import Approve from "../modules/manajemenSiswaBaru/approve/page";
+import Cancel from "../modules/manajemenSiswaBaru/cancel/page";
 
 const routes: RouteObject[] = [
   { path: "/", element: <Login /> },
@@ -16,6 +19,14 @@ const routes: RouteObject[] = [
       { path: "manajemen-user", element: <ManajemenUser /> },
       { path: "manajemen-pkl", element: <ManajemenPkl /> },
       { path: "status-ppdb", element: <StatusPpdb /> },
+      {
+        path: "manajemen-siswa-baru",
+        children: [
+          { path: "proses", element: <Proses /> },
+          { path: "approve", element: <Approve /> },
+          { path: "cancel", element: <Cancel /> },
+        ],
+      },
     ],
   },
 ];
