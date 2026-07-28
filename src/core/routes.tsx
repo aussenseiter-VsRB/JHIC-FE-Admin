@@ -5,6 +5,7 @@ import ManajemenUser from "../modules/manajemenUser/manajemenUser";
 import ManajemenPkl from "../modules/manajemenPkl/manajemenPkl";
 import StatusPpdb from "../modules/statusPpdb/statusPpdb";
 import Login from "../modules/login/login";
+import BuatBerita from "../modules/buatBerita/buatBerita";
 import Proses from "../modules/manajemenSiswaBaru/proses/page";
 import Approve from "../modules/manajemenSiswaBaru/approve/page";
 import Cancel from "../modules/manajemenSiswaBaru/cancel/page";
@@ -16,6 +17,7 @@ const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { path: "dashboard", element: <Dashboard /> },
+      { path: "buat-berita", element: <BuatBerita /> },
       { path: "manajemen-user", element: <ManajemenUser /> },
       { path: "manajemen-pkl", element: <ManajemenPkl /> },
       { path: "status-ppdb", element: <StatusPpdb /> },

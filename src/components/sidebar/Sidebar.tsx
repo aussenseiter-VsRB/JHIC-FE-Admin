@@ -7,6 +7,7 @@ import {
   GraduationCap,
   ClipboardCheck,
   UserPlus,
+  Newspaper,
   ChevronDown,
 } from "lucide-react";
 import "./Sidebar.css";
@@ -20,6 +21,7 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+  { path: "/buat-berita", label: "Buat Berita", icon: Newspaper },
   { path: "/status-ppdb", label: "Status PPDB", icon: ClipboardCheck },
   { path: "/manajemen-user", label: "Manajemen User", icon: Users },
   { path: "/manajemen-pkl", label: "Manajemen PKL", icon: GraduationCap },
