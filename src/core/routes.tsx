@@ -9,24 +9,30 @@ import BuatBerita from "../modules/buatBerita/buatBerita";
 import Proses from "../modules/manajemenSiswaBaru/proses/page";
 import Approve from "../modules/manajemenSiswaBaru/approve/page";
 import Cancel from "../modules/manajemenSiswaBaru/cancel/page";
+import RequireAuth from "./requireAuth";
 
 const routes: RouteObject[] = [
   { path: "/", element: <Login /> },
   {
-    path: "/",
-    element: <Layout />,
+    element: <RequireAuth />,
     children: [
-      { path: "dashboard", element: <Dashboard /> },
-      { path: "buat-berita", element: <BuatBerita /> },
-      { path: "manajemen-user", element: <ManajemenUser /> },
-      { path: "manajemen-pkl", element: <ManajemenPkl /> },
-      { path: "status-ppdb", element: <StatusPpdb /> },
       {
-        path: "manajemen-siswa-baru",
+        path: "/",
+        element: <Layout />,
         children: [
-          { path: "proses", element: <Proses /> },
-          { path: "approve", element: <Approve /> },
-          { path: "cancel", element: <Cancel /> },
+          { path: "dashboard", element: <Dashboard /> },
+          { path: "buat-berita", element: <BuatBerita /> },
+          { path: "manajemen-user", element: <ManajemenUser /> },
+          { path: "manajemen-pkl", element: <ManajemenPkl /> },
+          { path: "status-ppdb", element: <StatusPpdb /> },
+          {
+            path: "manajemen-siswa-baru",
+            children: [
+              { path: "proses", element: <Proses /> },
+              { path: "approve", element: <Approve /> },
+              { path: "cancel", element: <Cancel /> },
+            ],
+          },
         ],
       },
     ],

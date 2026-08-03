@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import pageData from "./login.json";
 import "./css/login.css";
 import LoginForm from "./components/LoginForm";
+import { login, setToken } from "./services/loginService";
 
 interface LoginPageData {
   page: { title: string; subtitle: string };
@@ -25,8 +26,9 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
@@ -35,8 +37,18 @@ function Login() {
       return;
     }
 
-    console.log("Login:", { username, password });
-    navigate("/dashboard");
+    setLoading(true);
+
+    try {
+      const response = await login(username, password);
+      setToken(response.token);
+      navigate("/dashboard");
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Terjadi kesalahan. Coba lagi.";
+      setError(message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -49,6 +61,7 @@ function Login() {
         username={username}
         password={password}
         error={error}
+        loading={loading}
         onUsernameChange={setUsername}
         onPasswordChange={setPassword}
         onSubmit={handleSubmit}

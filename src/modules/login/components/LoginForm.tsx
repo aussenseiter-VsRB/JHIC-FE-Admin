@@ -12,6 +12,7 @@ interface LoginFormProps {
   username: string;
   password: string;
   error: string;
+  loading: boolean;
   onUsernameChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
@@ -25,6 +26,7 @@ function LoginForm({
   username,
   password,
   error,
+  loading,
   onUsernameChange,
   onPasswordChange,
   onSubmit,
@@ -51,6 +53,7 @@ function LoginForm({
             value={username}
             onChange={(e) => onUsernameChange(e.target.value)}
             autoComplete="username"
+            disabled={loading}
           />
         </div>
 
@@ -66,11 +69,12 @@ function LoginForm({
             value={password}
             onChange={(e) => onPasswordChange(e.target.value)}
             autoComplete="current-password"
+            disabled={loading}
           />
         </div>
 
-        <button className="login-submit" type="submit">
-          {form.submitButton}
+        <button className="login-submit" type="submit" disabled={loading}>
+          {loading ? "Memasuk..." : form.submitButton}
         </button>
       </form>
 
