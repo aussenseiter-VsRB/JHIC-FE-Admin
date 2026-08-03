@@ -1,4 +1,4 @@
-import { Clock, Trash2 } from "lucide-react";
+import { Clock, Pencil, Trash2 } from "lucide-react";
 import type { Berita } from "../../../api/types";
 
 function fmtDate(s: string): string {
@@ -16,6 +16,7 @@ interface RiwayatBeritaProps {
   loading: boolean;
   error: string | null;
   deletingId: string | null;
+  onEdit: (berita: Berita) => void;
   onDelete: (id: string) => void;
 }
 
@@ -26,6 +27,7 @@ function RiwayatBerita({
   loading,
   error,
   deletingId,
+  onEdit,
   onDelete,
 }: RiwayatBeritaProps) {
   return (
@@ -60,15 +62,26 @@ function RiwayatBerita({
                 <td className="font-medium">{item.title}</td>
                 <td className="text-[#64748b]">{fmtDate(item.created_at)}</td>
                 <td>
-                  <button
-                    type="button"
-                    className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#dc2626] transition-colors hover:bg-[#fef2f2] disabled:cursor-not-allowed disabled:opacity-60"
-                    disabled={deletingId === item.id}
-                    onClick={() => onDelete(item.id)}
-                  >
-                    <Trash2 size={14} />
-                    {deletingId === item.id ? "Menghapus..." : "Hapus"}
-                  </button>
+                  <div className="flex gap-1.5">
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#3b82f6] transition-colors hover:bg-[#eff6ff] disabled:cursor-not-allowed disabled:opacity-60"
+                      disabled={deletingId === item.id}
+                      onClick={() => onEdit(item)}
+                    >
+                      <Pencil size={14} />
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#dc2626] transition-colors hover:bg-[#fef2f2] disabled:cursor-not-allowed disabled:opacity-60"
+                      disabled={deletingId === item.id}
+                      onClick={() => onDelete(item.id)}
+                    >
+                      <Trash2 size={14} />
+                      {deletingId === item.id ? "Menghapus..." : "Hapus"}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

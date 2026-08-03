@@ -4,11 +4,13 @@ import "./css/buatBerita.css";
 import FormBerita from "./components/FormBerita";
 import UploadFoto from "./components/UploadFoto";
 import RiwayatBerita from "./components/RiwayatBerita";
+import EditBeritaModal from "./components/EditBeritaModal";
 import type { Berita } from "../../api/types";
 import {
   createBerita,
   deleteBerita,
   listBerita,
+  updateBerita,
   uploadCoverImage,
 } from "./services/beritaService";
 import { getUser } from "../login/services/loginService";
@@ -27,7 +29,11 @@ function BuatBerita() {
   const [listError, setListError] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const [createdId, setCreatedId] = useState<string | null>(null);
+  const [editingBerita, setEditingBerita] = useState<Berita | null>(null);
+  const [editSaving, setEditSaving] = useState(false);
+  const [editError, setEditError] = useState<string | null>(null);
+
+  const [targetId, setTargetId] = useState<string | null>(null);
   const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -67,12 +73,35 @@ function BuatBerita() {
     if (res.ok) {
       setTitle("");
       setContent("");
-      setCreatedId((res.data as Berita).id);
+      setTargetId((res.data as Berita).id);
+      setCoverUrl(null);
       void refreshBerita();
     } else {
       setFormError(res.error);
     }
     setSaving(false);
+  };
+
+  const handleEdit = (berita: Berita) => {
+    setTargetId(berita.id);
+    setCoverUrl(berita.image_url ?? null);
+    setEditError(null);
+    setEditingBerita(berita);
+  };
+
+  const handleSaveEdit = async (editTitle: string, editContent: string) => {
+    if (!editingBerita) return;
+
+    setEditSaving(true);
+    setEditError(null);
+    const res = await updateBerita(editingBerita.id, editTitle, editContent);
+    if (res.ok) {
+      setEditingBerita(null);
+      void refreshBerita();
+    } else {
+      setEditError(res.error);
+    }
+    setEditSaving(false);
   };
 
   const handleDelete = async (id: string) => {
@@ -82,9 +111,8 @@ function BuatBerita() {
     const res = await deleteBerita(id);
     if (res.ok) {
       setBeritas((prev) => prev.filter((b) => b.id !== id));
-      if (createdId === id) {
-        setCreatedId(null);
-        setCoverUrl(null);
+      if (editingBerita?.id === id) {
+        setEditingBerita(null);
       }
     } else {
       setListError(res.error);
@@ -93,10 +121,10 @@ function BuatBerita() {
   };
 
   const handleUpload = async (file: File) => {
-    if (!createdId) return;
+    if (!targetId) return;
 
     setUploading(true);
-    const res = await uploadCoverImage(createdId, file);
+    const res = await uploadCoverImage(targetId, file);
     if (res.ok) {
       const { image_url } = res.data as { image_url: string };
       setCoverUrl(image_url);
@@ -127,7 +155,7 @@ function BuatBerita() {
           label={form.uploadLabel}
           hint={form.uploadHint}
           imageUrl={coverUrl}
-          disabled={!createdId}
+          disabled={!targetId}
           disabledHint="Simpan berita terlebih dahulu untuk mengunggah foto"
           uploading={uploading}
           onUpload={(file) => void handleUpload(file)}
@@ -141,7 +169,17 @@ function BuatBerita() {
         loading={listLoading}
         error={listError}
         deletingId={deletingId}
+        onEdit={handleEdit}
         onDelete={(id) => void handleDelete(id)}
+      />
+
+      <EditBeritaModal
+        key={editingBerita?.id ?? "closed"}
+        berita={editingBerita}
+        saving={editSaving}
+        apiError={editError}
+        onSave={(t, c) => void handleSaveEdit(t, c)}
+        onClose={() => setEditingBerita(null)}
       />
     </div>
   );
