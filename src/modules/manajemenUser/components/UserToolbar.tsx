@@ -4,22 +4,16 @@ interface UserToolbarProps {
   searchQuery: string;
   onSearchChange: (value: string) => void;
   roleFilter: string;
-  statusFilter: string;
   roles: string[];
-  statuses: string[];
   onRoleFilterChange: (value: string) => void;
-  onStatusFilterChange: (value: string) => void;
 }
 
 function UserToolbar({
   searchQuery,
   onSearchChange,
   roleFilter,
-  statusFilter,
   roles,
-  statuses,
   onRoleFilterChange,
-  onStatusFilterChange,
 }: UserToolbarProps) {
   return (
     <div className="manajemen-user-toolbar">
@@ -28,7 +22,7 @@ function UserToolbar({
         <input
           className="manajemen-user-search-input"
           type="text"
-          placeholder="Cari email..."
+          placeholder="Cari nama/email..."
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
         />
@@ -42,17 +36,6 @@ function UserToolbar({
           {roles.map((role) => (
             <option key={role} value={role}>
               Role: {role}
-            </option>
-          ))}
-        </select>
-        <select
-          className="manajemen-user-filter-select"
-          value={statusFilter}
-          onChange={(e) => onStatusFilterChange(e.target.value)}
-        >
-          {statuses.map((status) => (
-            <option key={status} value={status}>
-              Status: {status}
             </option>
           ))}
         </select>

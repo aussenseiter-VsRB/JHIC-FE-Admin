@@ -26,7 +26,7 @@ interface MenuItem {
 
 const menuItems: MenuItem[] = [
   { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ["admin", "guru"] },
-  { path: "/buat-berita", label: "Buat Berita", icon: Newspaper, roles: ["admin", "jurnal"] },
+  { path: "/buat-berita", label: "Buat Berita", icon: Newspaper, roles: ["jurnal"] },
   { path: "/status-ppdb", label: "Status PPDB", icon: ClipboardCheck, roles: ["admin", "guru"] },
   { path: "/manajemen-user", label: "Manajemen User", icon: Users, roles: ["admin"] },
   { path: "/manajemen-pkl", label: "Manajemen PKL", icon: GraduationCap, roles: ["admin", "guru"] },

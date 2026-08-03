@@ -3,24 +3,11 @@
     "title": "Manajemen User",
     "addButtonLabel": "Tambah User"
   },
-  "users": [
-    { "id": 1, "email": "admin1@example.com", "role": "Admin", "status": "Active" },
-    { "id": 2, "email": "jurnal1@example.com", "role": "Jurnal", "status": "Active" },
-    { "id": 3, "email": "guru1@example.com", "role": "Guru", "status": "Active" },
-    { "id": 4, "email": "guru2@example.com", "role": "Guru", "status": "Inactive" },
-    { "id": 5, "email": "admin2@example.com", "role": "Admin", "status": "Active" },
-    { "id": 6, "email": "jurnal2@example.com", "role": "Jurnal", "status": "Inactive" },
-    { "id": 7, "email": "guru3@example.com", "role": "Guru", "status": "Active" },
-    { "id": 8, "email": "admin3@example.com", "role": "Admin", "status": "Inactive" },
-    { "id": 9, "email": "jurnal3@example.com", "role": "Jurnal", "status": "Active" },
-    { "id": 10, "email": "guru4@example.com", "role": "Guru", "status": "Active" }
-  ],
   "table": {
-    "columns": ["ID", "Email", "Role", "Status", "Action"]
+    "columns": ["ID", "Nama", "Email", "Role", "Action"]
   },
   "filters": {
-    "roles": ["All", "Admin", "Jurnal", "Guru"],
-    "statuses": ["All", "Active", "Inactive"]
+    "roles": ["All", "Admin", "Jurnal", "Guru", "User"]
   },
   "pagination": {
     "perPage": 5

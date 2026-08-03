@@ -22,7 +22,7 @@ const routes: RouteObject[] = [
         element: <Layout />,
         children: [
           { path: "dashboard", element: <RequireRole roles={["admin", "guru"]}><Dashboard /></RequireRole> },
-          { path: "buat-berita", element: <RequireRole roles={["admin", "jurnal"]}><BuatBerita /></RequireRole> },
+          { path: "buat-berita", element: <RequireRole roles={["jurnal"]}><BuatBerita /></RequireRole> },
           { path: "manajemen-user", element: <RequireRole roles={["admin"]}><ManajemenUser /></RequireRole> },
           { path: "manajemen-pkl", element: <RequireRole roles={["admin", "guru"]}><ManajemenPkl /></RequireRole> },
           { path: "status-ppdb", element: <RequireRole roles={["admin", "guru"]}><StatusPpdb /></RequireRole> },

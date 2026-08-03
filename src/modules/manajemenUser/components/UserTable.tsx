@@ -1,22 +1,25 @@
 import { Pencil, Trash2, ChevronUp, ChevronDown } from "lucide-react";
 
-type User = {
-  id: number;
+export type UserRow = {
+  id: string;
   email: string;
+  name: string;
   role: string;
-  status: string;
+  class?: string;
+  jurusan?: string;
 };
 
-type SortKey = "id" | "email" | "role" | "status";
-type SortDirection = "asc" | "desc";
+export type SortKey = "id" | "name" | "email" | "role";
+export type SortDirection = "asc" | "desc";
 
 interface UserTableProps {
   columns: string[];
-  userList: User[];
+  userList: UserRow[];
   sortConfig: { key: SortKey; direction: SortDirection };
   onSort: (key: SortKey) => void;
-  onEdit: (user: User) => void;
-  onDelete: (user: User) => void;
+  onEdit: (user: UserRow) => void;
+  onDelete: (user: UserRow) => void;
+  deletingId?: string | null;
 }
 
 function UserTable({
@@ -26,6 +29,7 @@ function UserTable({
   onSort,
   onEdit,
   onDelete,
+  deletingId,
 }: UserTableProps) {
   const renderSortIcon = (key: SortKey) => {
     if (sortConfig.key !== key) return null;
@@ -41,8 +45,9 @@ function UserTable({
       <thead>
         <tr>
           {columns.map((col) => {
-            const sortKey = col.toLowerCase() as SortKey;
-            const isSortable = ["id", "email", "role", "status"].includes(
+            const lower = col.toLowerCase();
+            const sortKey = (lower === "nama" ? "name" : lower) as SortKey;
+            const isSortable = ["id", "name", "email", "role"].includes(
               sortKey,
             );
             return (
@@ -74,13 +79,13 @@ function UserTable({
           userList.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
+              <td>{user.name || "-"}</td>
               <td>{user.email}</td>
-              <td>{user.role}</td>
               <td>
                 <span
-                  className={`manajemen-user-status manajemen-user-status--${user.status.toLowerCase()}`}
+                  className={`manajemen-user-role manajemen-user-role--${user.role.toLowerCase()}`}
                 >
-                  {user.status}
+                  {user.role}
                 </span>
               </td>
               <td>
@@ -89,6 +94,7 @@ function UserTable({
                     className="manajemen-user-action-btn manajemen-user-action-btn--edit"
                     type="button"
                     title="Edit"
+                    disabled={deletingId === user.id}
                     onClick={() => onEdit(user)}
                   >
                     <Pencil size={14} />
@@ -97,6 +103,7 @@ function UserTable({
                     className="manajemen-user-action-btn manajemen-user-action-btn--delete"
                     type="button"
                     title="Hapus"
+                    disabled={deletingId === user.id}
                     onClick={() => onDelete(user)}
                   >
                     <Trash2 size={14} />
