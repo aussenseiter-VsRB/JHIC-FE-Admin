@@ -4,8 +4,8 @@
     "subtitle": "Masukkan akun Anda untuk melanjutkan"
   },
   "form": {
-    "usernameLabel": "Username",
-    "usernamePlaceholder": "Masukkan username",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Masukkan email",
     "passwordLabel": "Password",
     "passwordPlaceholder": "Masukkan password",
     "submitButton": "Masuk"

@@ -11,24 +11,29 @@ import {
   LogOut,
   ChevronDown,
 } from "lucide-react";
+import { getRole } from "../../modules/login/services/loginService";
 import "./Sidebar.css";
+
+type Role = "admin" | "jurnal" | "guru" | "user";
 
 interface MenuItem {
   path?: string;
   label: string;
   icon: typeof LayoutDashboard;
+  roles: Role[];
   children?: { path: string; label: string }[];
 }
 
 const menuItems: MenuItem[] = [
-  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { path: "/buat-berita", label: "Buat Berita", icon: Newspaper },
-  { path: "/status-ppdb", label: "Status PPDB", icon: ClipboardCheck },
-  { path: "/manajemen-user", label: "Manajemen User", icon: Users },
-  { path: "/manajemen-pkl", label: "Manajemen PKL", icon: GraduationCap },
+  { path: "/dashboard", label: "Dashboard", icon: LayoutDashboard, roles: ["admin", "guru"] },
+  { path: "/buat-berita", label: "Buat Berita", icon: Newspaper, roles: ["admin", "jurnal"] },
+  { path: "/status-ppdb", label: "Status PPDB", icon: ClipboardCheck, roles: ["admin", "guru"] },
+  { path: "/manajemen-user", label: "Manajemen User", icon: Users, roles: ["admin"] },
+  { path: "/manajemen-pkl", label: "Manajemen PKL", icon: GraduationCap, roles: ["admin", "guru"] },
   {
     label: "Manajemen Siswa Baru",
     icon: UserPlus,
+    roles: ["admin"],
     children: [
       { path: "/manajemen-siswa-baru/proses", label: "Proses" },
       { path: "/manajemen-siswa-baru/approve", label: "Approve" },
@@ -40,6 +45,7 @@ const menuItems: MenuItem[] = [
 function Sidebar() {
   const { pathname } = useLocation();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const role = getRole() as Role | null;
 
   const toggleDropdown = (label: string) => {
     setOpenDropdown((prev) => (prev === label ? null : label));
@@ -47,6 +53,8 @@ function Sidebar() {
 
   const isDropdownActive = (children: { path: string }[]) =>
     children.some((c) => pathname.startsWith(c.path));
+
+  const visibleItems = menuItems.filter((item) => item.roles.includes(role ?? "user"));
 
   return (
     <aside className="sidebar">
@@ -56,7 +64,7 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar-nav">
-        {menuItems.map((item) =>
+        {visibleItems.map((item) =>
           item.children ? (
             <div
               key={item.label}

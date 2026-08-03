@@ -1,20 +1,33 @@
-import { Clock } from "lucide-react";
+import { Clock, Trash2 } from "lucide-react";
+import type { Berita } from "../../../api/types";
 
-interface RiwayatItem {
-  id: number;
-  judul: string;
-  penulis: string;
-  tanggal: string;
-  status: string;
+function fmtDate(s: string): string {
+  return new Date(s).toLocaleDateString("id-ID", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
 }
 
 interface RiwayatBeritaProps {
   title: string;
   columns: string[];
-  items: RiwayatItem[];
+  items: Berita[];
+  loading: boolean;
+  error: string | null;
+  deletingId: string | null;
+  onDelete: (id: string) => void;
 }
 
-function RiwayatBerita({ title, columns, items }: RiwayatBeritaProps) {
+function RiwayatBerita({
+  title,
+  columns,
+  items,
+  loading,
+  error,
+  deletingId,
+  onDelete,
+}: RiwayatBeritaProps) {
   return (
     <div className="buat-berita-card buat-berita-card--full">
       <div className="buat-berita-card-header">
@@ -24,6 +37,12 @@ function RiwayatBerita({ title, columns, items }: RiwayatBeritaProps) {
         <span className="buat-berita-card-title">{title}</span>
         <span className="ml-auto text-xs text-[#94a3b8]">{items.length} item</span>
       </div>
+
+      {error && (
+        <p className="mb-4 rounded-lg bg-[#fef2f2] px-3.5 py-2.5 text-sm text-[#991b1b]">
+          {error}
+        </p>
+      )}
 
       <div className="buat-berita-table-wrapper">
         <table className="buat-berita-table">
@@ -35,18 +54,21 @@ function RiwayatBerita({ title, columns, items }: RiwayatBeritaProps) {
             </tr>
           </thead>
           <tbody>
-            {items.map((item) => (
+            {items.map((item, index) => (
               <tr key={item.id}>
-                <td className="text-[#94a3b8]">{item.id}</td>
-                <td className="font-medium">{item.judul}</td>
-                <td className="text-[#64748b]">{item.penulis}</td>
-                <td className="text-[#64748b]">{item.tanggal}</td>
+                <td className="text-[#94a3b8]">{index + 1}</td>
+                <td className="font-medium">{item.title}</td>
+                <td className="text-[#64748b]">{fmtDate(item.created_at)}</td>
                 <td>
-                  <span
-                    className={`buat-berita-status buat-berita-status--${item.status === "Aktif" ? "aktif" : "draft"}`}
+                  <button
+                    type="button"
+                    className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium text-[#dc2626] transition-colors hover:bg-[#fef2f2] disabled:cursor-not-allowed disabled:opacity-60"
+                    disabled={deletingId === item.id}
+                    onClick={() => onDelete(item.id)}
                   >
-                    {item.status}
-                  </span>
+                    <Trash2 size={14} />
+                    {deletingId === item.id ? "Menghapus..." : "Hapus"}
+                  </button>
                 </td>
               </tr>
             ))}
@@ -54,7 +76,11 @@ function RiwayatBerita({ title, columns, items }: RiwayatBeritaProps) {
         </table>
       </div>
 
-      {items.length === 0 && (
+      {loading && (
+        <p className="py-8 text-center text-sm text-[#94a3b8]">Memuat data...</p>
+      )}
+
+      {!loading && items.length === 0 && (
         <p className="py-8 text-center text-sm text-[#94a3b8]">Belum ada riwayat berita</p>
       )}
     </div>

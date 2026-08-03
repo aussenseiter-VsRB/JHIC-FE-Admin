@@ -1,7 +1,7 @@
 ---
 name: API Reference
 relation: index.md → core/
-description: API endpoint documentation for the JHIC backend at jhicbe-4bmao1ng.b4a.run
+description: API endpoint documentation for the JHIC backend at jhicbe-o5xq7he4.b4a.run
 type: Enforce
 ---
 
@@ -10,7 +10,7 @@ type: Enforce
 ## Base URL
 
 ```
-https://jhicbe-4bmao1ng.b4a.run/api/v1
+https://jhicbe-o5xq7he4.b4a.run/
 ```
 
 All endpoints are prefixed with `/api/v1`.

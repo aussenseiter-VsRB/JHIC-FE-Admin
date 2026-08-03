@@ -10,6 +10,7 @@ import Proses from "../modules/manajemenSiswaBaru/proses/page";
 import Approve from "../modules/manajemenSiswaBaru/approve/page";
 import Cancel from "../modules/manajemenSiswaBaru/cancel/page";
 import RequireAuth from "./requireAuth";
+import RequireRole from "./requireRole";
 
 const routes: RouteObject[] = [
   { path: "/", element: <Login /> },
@@ -20,17 +21,17 @@ const routes: RouteObject[] = [
         path: "/",
         element: <Layout />,
         children: [
-          { path: "dashboard", element: <Dashboard /> },
-          { path: "buat-berita", element: <BuatBerita /> },
-          { path: "manajemen-user", element: <ManajemenUser /> },
-          { path: "manajemen-pkl", element: <ManajemenPkl /> },
-          { path: "status-ppdb", element: <StatusPpdb /> },
+          { path: "dashboard", element: <RequireRole roles={["admin", "guru"]}><Dashboard /></RequireRole> },
+          { path: "buat-berita", element: <RequireRole roles={["admin", "jurnal"]}><BuatBerita /></RequireRole> },
+          { path: "manajemen-user", element: <RequireRole roles={["admin"]}><ManajemenUser /></RequireRole> },
+          { path: "manajemen-pkl", element: <RequireRole roles={["admin", "guru"]}><ManajemenPkl /></RequireRole> },
+          { path: "status-ppdb", element: <RequireRole roles={["admin", "guru"]}><StatusPpdb /></RequireRole> },
           {
             path: "manajemen-siswa-baru",
             children: [
-              { path: "proses", element: <Proses /> },
-              { path: "approve", element: <Approve /> },
-              { path: "cancel", element: <Cancel /> },
+              { path: "proses", element: <RequireRole roles={["admin"]}><Proses /></RequireRole> },
+              { path: "approve", element: <RequireRole roles={["admin"]}><Approve /></RequireRole> },
+              { path: "cancel", element: <RequireRole roles={["admin"]}><Cancel /></RequireRole> },
             ],
           },
         ],

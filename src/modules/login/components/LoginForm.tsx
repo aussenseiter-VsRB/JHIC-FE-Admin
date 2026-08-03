@@ -2,18 +2,18 @@ interface LoginFormProps {
   title: string;
   subtitle: string;
   form: {
-    usernameLabel: string;
-    usernamePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
     passwordLabel: string;
     passwordPlaceholder: string;
     submitButton: string;
   };
   footerText: string;
-  username: string;
+  email: string;
   password: string;
   error: string;
   loading: boolean;
-  onUsernameChange: (value: string) => void;
+  onEmailChange: (value: string) => void;
   onPasswordChange: (value: string) => void;
   onSubmit: (e: React.FormEvent) => void;
 }
@@ -23,11 +23,11 @@ function LoginForm({
   subtitle,
   form,
   footerText,
-  username,
+  email,
   password,
   error,
   loading,
-  onUsernameChange,
+  onEmailChange,
   onPasswordChange,
   onSubmit,
 }: LoginFormProps) {
@@ -42,17 +42,17 @@ function LoginForm({
         {error && <div className="login-error">{error}</div>}
 
         <div className="login-field">
-          <label className="login-label" htmlFor="username">
-            {form.usernameLabel}
+          <label className="login-label" htmlFor="email">
+            {form.emailLabel}
           </label>
           <input
             className="login-input"
-            id="username"
-            type="text"
-            placeholder={form.usernamePlaceholder}
-            value={username}
-            onChange={(e) => onUsernameChange(e.target.value)}
-            autoComplete="username"
+            id="email"
+            type="email"
+            placeholder={form.emailPlaceholder}
+            value={email}
+            onChange={(e) => onEmailChange(e.target.value)}
+            autoComplete="email"
             disabled={loading}
           />
         </div>

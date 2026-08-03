@@ -1,38 +1,70 @@
 import { request } from "../../../api/client";
+import type { AuthResponse, User } from "../../../api/types";
 
-interface LoginResponse {
-  token: string;
-}
+const TOKEN_KEY = "jhic_token";
+const USER_KEY = "jhic_user";
 
-async function login(username: string, password: string): Promise<LoginResponse> {
+async function login(email: string, password: string): Promise<AuthResponse> {
   const res = await request("/auth/login", {
     method: "POST",
-    body: { username, password },
+    body: { email, password },
   });
 
   if (!res.ok) {
-    const message = res.error || "Gagal masuk. Periksa username dan password.";
+    const message = res.error || "Gagal masuk. Periksa email dan password.";
     throw new Error(message);
   }
 
-  return res.data as LoginResponse;
+  return res.data as AuthResponse;
 }
 
 function getToken(): string | null {
-  return localStorage.getItem("jhic_token");
+  return localStorage.getItem(TOKEN_KEY);
 }
 
 function setToken(token: string): void {
-  localStorage.setItem("jhic_token", token);
+  localStorage.setItem(TOKEN_KEY, token);
 }
 
 function removeToken(): void {
-  localStorage.removeItem("jhic_token");
+  localStorage.removeItem(TOKEN_KEY);
+}
+
+function getUser(): User | null {
+  const raw = localStorage.getItem(USER_KEY);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw) as User;
+  } catch {
+    return null;
+  }
+}
+
+function setUser(user: User): void {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+}
+
+function removeUser(): void {
+  localStorage.removeItem(USER_KEY);
+}
+
+function getRole(): string | null {
+  return getUser()?.role ?? null;
 }
 
 function isAuthenticated(): boolean {
   return getToken() !== null;
 }
 
-export { login, getToken, setToken, removeToken, isAuthenticated };
-export type { LoginResponse };
+export {
+  login,
+  getToken,
+  setToken,
+  removeToken,
+  getUser,
+  setUser,
+  removeUser,
+  getRole,
+  isAuthenticated,
+};
+export type { AuthResponse };

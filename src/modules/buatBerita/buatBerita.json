@@ -3,23 +3,11 @@
     "title": "Buat Berita"
   },
   "form": {
-    "authorLabel": "Penulis",
-    "authorOptions": ["Admin Sekolah", "Jurnalistik Mata Muda"],
-    "contentLabel": "Berita",
-    "contentPlaceholder": "Tulis berita di sini...",
     "uploadLabel": "Upload Foto",
-    "uploadHint": "Format: JPG, PNG. Maks 2MB",
-    "submitLabel": "Simpan"
+    "uploadHint": "Format: JPG, PNG, GIF, WebP. Maks 5MB"
   },
   "history": {
     "title": "Riwayat Pembuatan Berita",
-    "columns": ["No", "Judul Berita", "Penulis", "Tanggal", "Status"]
-  },
-  "riwayat": [
-    { "id": 1, "judul": "Pembukaan PPDB 2026/2027", "penulis": "Admin", "tanggal": "20/07/2026", "status": "Aktif" },
-    { "id": 2, "judul": "Kegiatan LDKS OSIS 2026", "penulis": "Humas", "tanggal": "18/07/2026", "status": "Aktif" },
-    { "id": 3, "judul": "Pengumuman Kelulusan XII", "penulis": "Waka Kurikulum", "tanggal": "15/07/2026", "status": "Aktif" },
-    { "id": 4, "judul": "Jadwal Ujian Akhir Semester", "penulis": "Admin", "tanggal": "10/07/2026", "status": "Draft" },
-    { "id": 5, "judul": "Informasi Prakerin 2026", "penulis": "Waka Humas", "tanggal": "05/07/2026", "status": "Draft" }
-  ]
+    "columns": ["No", "Judul Berita", "Tanggal", "Aksi"]
+  }
 }
