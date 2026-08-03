@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/v1': {
-        target: 'https://jhicbe-4bmao1ng.b4a.run',
+        target: 'https://jhicbe-wfzmr6u4.b4a.run',
         changeOrigin: true,
         rewrite: (path) => path,
       },

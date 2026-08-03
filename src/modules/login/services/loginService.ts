@@ -1,23 +1,21 @@
-const BASE_URL = "/api/v1";
+import { request } from "../../../api/client";
 
 interface LoginResponse {
   token: string;
 }
 
 async function login(username: string, password: string): Promise<LoginResponse> {
-  const response = await fetch(`${BASE_URL}/auth/login`, {
+  const res = await request("/auth/login", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: { username, password },
   });
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => ({}));
-    const message = errorData.message || "Gagal masuk. Periksa username dan password.";
+  if (!res.ok) {
+    const message = res.error || "Gagal masuk. Periksa username dan password.";
     throw new Error(message);
   }
 
-  return response.json();
+  return res.data as LoginResponse;
 }
 
 function getToken(): string | null {
