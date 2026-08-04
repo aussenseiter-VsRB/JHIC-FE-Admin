@@ -6,9 +6,10 @@ interface UploadFotoProps {
   hint: string;
   imageUrl: string | null;
   disabled: boolean;
-  disabledHint: string;
+  pending: boolean;
   uploading: boolean;
   onUpload: (file: File) => void;
+  onRemovePending: () => void;
 }
 
 function UploadFoto({
@@ -16,9 +17,10 @@ function UploadFoto({
   hint,
   imageUrl,
   disabled,
-  disabledHint,
+  pending,
   uploading,
   onUpload,
+  onRemovePending,
 }: UploadFotoProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -58,7 +60,9 @@ function UploadFoto({
           <span className="text-sm font-medium text-[#64748b]">
             {uploading ? "Mengunggah..." : "Klik untuk upload foto"}
           </span>
-          <span className="text-xs text-[#94a3b8]">{disabled ? disabledHint : hint}</span>
+          <span className="text-xs text-[#94a3b8]">
+            {pending ? "Foto akan diunggah otomatis setelah berita disimpan" : hint}
+          </span>
         </button>
 
         <input
@@ -70,9 +74,17 @@ function UploadFoto({
           className="hidden"
         />
 
-        {disabled && !displayed && (
-          <p className="rounded-lg bg-[#fefce8] px-3.5 py-2.5 text-xs text-[#854d0e]">
-            {disabledHint}
+        {pending && !displayed && (
+          <p className="flex items-center justify-between gap-3 rounded-lg bg-[#fefce8] px-3.5 py-2.5 text-xs text-[#854d0e]">
+            <span>Foto akan diunggah otomatis setelah berita disimpan.</span>
+            <button
+              type="button"
+              onClick={onRemovePending}
+              disabled={uploading}
+              className="shrink-0 font-medium text-[#a16207] underline decoration-[#a16207]/40 underline-offset-2 hover:text-[#713f12] disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              Batal
+            </button>
           </p>
         )}
 

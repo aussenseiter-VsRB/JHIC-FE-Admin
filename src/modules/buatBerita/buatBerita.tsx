@@ -36,6 +36,7 @@ function BuatBerita() {
   const [targetId, setTargetId] = useState<string | null>(null);
   const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
 
   useEffect(() => {
     void (async () => {
@@ -71,10 +72,16 @@ function BuatBerita() {
     setSaving(true);
     const res = await createBerita(title.trim(), content.trim());
     if (res.ok) {
+      const id = (res.data as Berita).id;
       setTitle("");
       setContent("");
-      setTargetId((res.data as Berita).id);
+      setTargetId(id);
       setCoverUrl(null);
+      if (pendingCoverFile) {
+        const file = pendingCoverFile;
+        setPendingCoverFile(null);
+        await performUpload(id, file);
+      }
       void refreshBerita();
     } else {
       setFormError(res.error);
@@ -85,6 +92,7 @@ function BuatBerita() {
   const handleEdit = (berita: Berita) => {
     setTargetId(berita.id);
     setCoverUrl(berita.image_url ?? null);
+    setPendingCoverFile(null);
     setEditError(null);
     setEditingBerita(berita);
   };
@@ -120,11 +128,9 @@ function BuatBerita() {
     setDeletingId(null);
   };
 
-  const handleUpload = async (file: File) => {
-    if (!targetId) return;
-
+  const performUpload = async (id: string, file: File) => {
     setUploading(true);
-    const res = await uploadCoverImage(targetId, file);
+    const res = await uploadCoverImage(id, file);
     if (res.ok) {
       const { image_url } = res.data as { image_url: string };
       setCoverUrl(image_url);
@@ -132,6 +138,14 @@ function BuatBerita() {
       setFormError(res.error);
     }
     setUploading(false);
+  };
+
+  const handleUpload = async (file: File) => {
+    if (targetId) {
+      void performUpload(targetId, file);
+    } else {
+      setPendingCoverFile(file);
+    }
   };
 
   return (
@@ -155,10 +169,11 @@ function BuatBerita() {
           label={form.uploadLabel}
           hint={form.uploadHint}
           imageUrl={coverUrl}
-          disabled={!targetId}
-          disabledHint="Simpan berita terlebih dahulu untuk mengunggah foto"
+          disabled={uploading}
+          pending={pendingCoverFile !== null}
           uploading={uploading}
           onUpload={(file) => void handleUpload(file)}
+          onRemovePending={() => setPendingCoverFile(null)}
         />
       </div>
 
